@@ -812,3 +812,6 @@ developers outside of Tor, we thank the development teams at Lantern, Operator F
 
 [RFC1929]     Leech, M., "Username/Password Authentication for
                  SOCKS V5", RFC 1929, March 1996.
+
+[PT2-DISPATCHER] Wiley, Brandon., Shapeshifter Dispatcher.
+https://github.com/OperatorFoundation/shapeshifter-dispatcher
