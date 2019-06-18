@@ -121,7 +121,7 @@ obfuscation technique would, itself, be learned. Methods were developed
 by which a single obfuscation technique could transform on its own [cite FTE 
 proxy, ScrambleSuit].  But, this approach proved expensive in terms of 
 computational load.  Interest gathered in solving this problem and as more ideas
-arose so to did the need for a mechanism supported rapid deploying of new 
+arose so to did the need for a mechanism supporting rapid deploying of new 
 obfuscation techniques.  
 
 While intense work on network traffic obfuscation commenced initially and continues within
