@@ -295,7 +295,7 @@ Client-side Pluggable Transport forward proxies are configured via the following
  outgoing network connections.  It is a URI [RFC3986] of the
  format:
 
-	&lt;proxy_type&gt;://[&lt;user_name&gt;[:&lt;password&gt;][@]&lt;ip&gt;:&lt;port&gt;.
+	<proxy_type>://[<user_name>[:password][@]<ip>:<port>.
 
  The `TOR_PT_PROXY` environment variable is OPTIONAL and
  MUST be omitted if there is no need to connect via an
