@@ -72,7 +72,7 @@ efforts is slowed by the lack of common agreement on how these techniques are in
 made easily interoperable with applications, and deployed quickly.  This 
 specification addresses those issues.
 
-	&lt;!-- taken largely from PT1 spec --&gt;
+	<!-- taken largely from PT1 spec -->
 This specification describes a method for decoupling protocol-level obfuscation from 
 an application's client/server code, in a manner that promotes rapid development 
 of obfuscation/circumvention tools and promotes reuse across privacy tools such as
@@ -135,7 +135,7 @@ these requirements.
 
 # Architecture Overview
 
-	&lt;!-- from the PT1 spec --&gt;
+	<!-- from the PT1 spec -->
 
      +------------+                    +---------------------------+
      | Client App +-- Local Loopback --+ PT Client (SOCKS Proxy)   +
@@ -173,7 +173,7 @@ and SHOULD prefer SOCKS 5 over SOCKS 4.
 
 # Specification
 
-	&lt;!-- from PT1 spec --&gt;
+	<!-- from PT1 spec -->
 
 ## Workflow
 	
@@ -749,7 +749,7 @@ SOCKS protocol version.
 
 # Anonymity Considerations
 
-	&lt;!-- from PT1 spec --&gt;	
+	<!-- from PT1 spec -->
 When designing and implementing a Pluggable Transport, care
 should be taken to preserve the privacy of clients and to avoid
 leaking personally identifying information.
@@ -765,7 +765,7 @@ care to preserve server side information confidential when applicable.
 
 # Security Considerations
 
-	&lt;!-- taken from SOCKS RFC description --&gt;
+	<!-- taken from SOCKS RFC description -->
 This document describes a protocol for the application-layer traversal of data
 over IP networks as a thin veneer over the SOCKS 5 protocol.  The security of 
 our network traversal is highly dependent on the particular authentication 
