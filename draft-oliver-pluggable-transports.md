@@ -130,6 +130,7 @@ specific product or service.  The notion of "Pluggable Transports" (PT) was born
 these requirements.
 
 # Architecture Overview
+
 The PT Server software exposes a public proxy that accepts connections from PT Clients. 
 The PT Client transforms the traffic before it hits the public Internet and the PT 
 Server reverses this transformation before passing the traffic on to its next destination. 
@@ -145,17 +146,17 @@ directly into the Server App. The Client App and Server App communicate through
 socket-like APIs, with all communication between them going through the PT library, 
 which only sends transformed traffic over the public Internet.
 
-		+------------+                     +---------------------------+
-		| Client App +-- Socket-like API --+ PT Client (Library)       +--+ 
-		+------------+                     +---------------------------+  |
-																		  | 
-		             Public Internet (Obfuscated/Transformed traffic) ==> | 
-																		  | 
-		+------------+                       +-------------------------+  | 
-		| Server App +--  Socket-like API  --+ PT Server (Library)     +--+
-		+------------+                       +-------------------------+
-		
-					Figure 1. API Architecture Overview
+      +------------+                     +---------------------------+
+      | Client App +-- Socket-like API --+ PT Client (Library)       +--+ 
+      +------------+                     +---------------------------+  |
+                                                                        | 
+                   Public Internet (Obfuscated/Transformed traffic) ==> | 
+                                                                        | 
+      +------------+                       +-------------------------+  | 
+      | Server App +--  Socket-like API  --+ PT Server (Library)     +--+
+      +------------+                       +-------------------------+
+      
+               Figure 1. API Architecture Overview
 		
 When using the transports as a separate process on both client and server, 
 the Dispatcher IPC Interface is used. On the client device, the PT Client 
@@ -163,35 +164,35 @@ software exposes a local proxy to the client application, and transforms traffic
 before forwarding it to the PT Server. The PT Dispatcher can be configured to 
 provide different proxy types, supporting proxying of both TCP and UDP traffic.
 
-		+------------+                     +---------------------------+
-		| Client App +---- Local Proxy ----+ PT Client (Dispatcher)    +--+ 
-		+------------+                     +---+-------------------+---+  |
-				                               | PT Client Library |      |
-				                               +-------------------+      |
-				                                                          |
-				     Public Internet (Transformed/Proxied traffic) =====> |
-				                                                          |
-		+------------+                     +---------------------------+  |
-		| Server App +---- Local Proxy ----+ PT Server (Dispatcher )   +--+
-		+------------+                     +---+-------------------+---+ 
-		                                       |PT Server (Library)| 
-		                                       +-------------------+
+      +------------+                     +---------------------------+
+      | Client App +---- Local Proxy ----+ PT Client (Dispatcher)    +--+ 
+      +------------+                     +---+-------------------+---+  |
+                                           | PT Client Library |        |
+                                           +-------------------+        |
+                                                                        |
+                 Public Internet (Transformed/Proxied traffic) =====>   |
+                                                                        |
+      +------------+                     +---------------------------+  |
+      | Server App +---- Local Proxy ----+ PT Server (Dispatcher )   +--+
+      +------------+                     +---+-------------------+---+ 
+                                             |PT Server (Library)| 
+                                             +-------------------+
 
-				Figure 2. IPC Architecture Overview
+            Figure 2. IPC Architecture Overview
 
 A PT may also be function via Dispatcher IPC on one end of the connection but via 
 Transport API on the other, as below (or vice-versa):
 
-		+------------+                     +---------------------------+
-		| Client App +---- Local Proxy ----+ PT Dispatcher Client      +-+ 
-		+------------+                     +---+-------------------+---+ |
-		                                                                 |
-		                                                                 |
-		+------------+                     +--------------------------+  | 
-		| Server App +-- Socket-like API --+ PT Server (Library )     +--+ 
-		+------------+                     +--------------------------+
+      +------------+                     +---------------------------+
+      | Client App +---- Local Proxy ----+ PT Dispatcher Client      +-+ 
+      +------------+                     +---+-------------------+---+ |
+                                                                       |
+                                                                       |
+      +------------+                     +--------------------------+  | 
+      | Server App +-- Socket-like API --+ PT Server (Library )     +--+ 
+      +------------+                     +--------------------------+
 
-				Figure 3. Mixed IPC and Transport API example
+            Figure 3. Mixed IPC and Transport API example
 
 Each invocation of a PT MUST be either a client OR a server.
 
@@ -322,6 +323,7 @@ traditional separate process Dispatcher IPC. An alternative would be to use the
 Transports API directly instead of Dispatcher IPC.
 
 ## Anonymity Considerations
+
 When designing and implementing a Pluggable Transport, care should be taken to preserve 
 the privacy of clients and to avoid leaking personally identifying information.
 Examples of client related considerations are:
@@ -334,13 +336,18 @@ address and port being confidential, so clients also need to take care to preser
 server side information confidential when applicable.
  
 # References
+
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.
+
 [RFC1928] Leech, M., Ganis, M., Lee, Y., Kuris, R., Koblas, D., Jones, L., "SOCKS Protocol Version 5", RFC 1928, March 1996.
+
 [EXTORPORT] Kadianakis, G., Mathewson, N., "Extended ORPort and TransportControlPort", Tor Proposal 196, March 2012.
+
 [RFC3986] Berners-Lee, T., Fielding, R., Masinter, L., "Uniform Resource Identifier (URI): Generic Syntax", RFC 3986, January 2005.
+
 [RFC1929] Leech, M., "Username/Password Authentication for SOCKS V5", RFC 1929, March 1996.
-[PT2-DISPATCHER] Wiley, Brandon., Shapeshifter Dispatcher.
-https://github.com/OperatorFoundation/shapeshifter-dispatcher
+
+[PT2-DISPATCHER] Wiley, Brandon., Shapeshifter Dispatcher. https://github.com/OperatorFoundation/shapeshifter-dispatcher
 
 # Acknowledgments
 Many people contributed to the PT 2.0 specification. Major contributions were made by 
