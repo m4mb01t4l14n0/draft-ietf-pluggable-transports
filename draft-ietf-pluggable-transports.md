@@ -1,11 +1,8 @@
 ---
-title: Enabling Network Traffic Obfuscation: Pluggable Transports IPC
+title: Enabling Network Traffic Obfuscation - Pluggable Transports IPC
 abbrev: Pluggable Transports
 docname: draft-irtf-oliver-pt-ipc
 category: info
-category: Computer-Communication Networks: Network Protocols 
-category: Computer-Communication Networks: General—Security and protection 
-category: Computers And Society: Public Policy Issues—Privacy
 
 ipr: trust200902
 area: General
@@ -608,7 +605,7 @@ per-transport information back to the parent process.
 
 The currently recognized 'options' are:
 
-  ARGS:[<Key>=<Value>]+[<Key>=<Value>]
+  ARGS:[Key=Value]+[Key=Value]
 
  The "ARGS" option is used to pass additional key/value
  formatted information that clients will require to use
