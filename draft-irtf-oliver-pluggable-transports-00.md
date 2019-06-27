@@ -1,32 +1,39 @@
 ---
 title: Enabling Network Traffic Obfuscation - Pluggable Transports
 abbrev: Pluggable Transports
-docname: draft-irtf-oliver-pluggable-transports
+docname: draft-irtf-oliver-pluggable-transports-00
 category: info
 
 ipr: trust200902
 area: General
-workgroup: Transport Working Group
+workgroup: Network Working Group
 keyword: Internet-Draft
-keyword: Tor
-keyword: pluggable transport
-keyword: active probing
-keyword: traffic analysis
-keyword: censorship
-keyword: circumvention
 
 stand_alone: yes
-pi: [toc, sortrefs, symrefs]
+pi: 
+  rfcedstyle: yes
+  toc: yes
+  tocindent: yes
+  sortrefs: yes
+  symrefs: yes
+  strict: yes
+  comments: yes
+  inline: yes
+  text-list-symbols: -o*+
 
 author:
  -
-    ins: "David Oliver"
+    ins: "D. Oliver"
     name: "David M. Oliver"
     organization: "Guardian Project"
     email: david@guardianproject.info
     uri: https://guardianproject.info
 
 normative:
+  PT2.1:
+      title: "Pluggable Transport Base Specification"
+      date: 2018
+      target: https://github.com/Pluggable-Transports/Pluggable-Transports-spec/blob/master/releases/PTSpecV2.1Draft1/Pluggable%20Transport%20Specification%20v2.1%20-%20Base%20Specification%20v2.1%2C%20Draft%201.pdf
 
 informative:
 
@@ -38,6 +45,8 @@ surveillance and censorship. This specification does
 not define or limit the techniques themselves, but rather focuses 
 on the startup, shutdown, and inter-process communication mechanisms 
 required to make these technologies interoperable with applications.
+
+This document is based heavily on {{PT2.1}}.
 
 --- middle
 
@@ -65,7 +74,6 @@ efforts is slowed by the lack of common agreement on how these techniques are in
 made easily interoperable with applications, and deployed quickly.  This 
 specification addresses those issues.
 
-	<!-- taken largely from PT1 spec -->
 This specification describes a method for decoupling protocol-level obfuscation from 
 an application's client/server code, in a manner that promotes rapid development 
 of obfuscation/circumvention tools and promotes reuse across privacy tools such as
@@ -104,8 +112,8 @@ A defense against this type of active probing is traffic obfuscation - disguisin
 the application data itself in a manner that is less-easily fingerprinted.  But in
 early experiments, it quickly became clear that repeated use of the same 
 obfuscation technique would, itself, be learned. Methods were developed 
-by which a single obfuscation technique could transform on its own [cite FTE 
-proxy, ScrambleSuit].  But, this approach proved expensive in terms of 
+by which a single obfuscation technique could transform on its own TODO: cite FTE 
+proxy, ScrambleSuit.  But, this approach proved expensive in terms of 
 computational load.  Interest gathered in solving this problem and as more ideas
 arose so to did the need for a mechanism supporting rapid deploying of new 
 obfuscation techniques.  
@@ -127,7 +135,7 @@ By default, the PT Server directly forwards this data to the Server App, but the
 Server App itself may itself be a proxy server and expect the forwarded traffic it 
 receives to conform to a proxy communication protocol such as SOCKS or TURN. There is 
 also an optional lightweight protocol to facilitate communicating connection metadata 
-that would otherwise be lost such as the source IP address and port [EXTORPORT].
+that would otherwise be lost such as the source IP address and port EXTORPORT.
 
 When using the API on both client and server (“Transport API Interface”), the PT Client 
 Library is integrated directly into the Client App and the PT Server Library is integrated 
@@ -195,13 +203,14 @@ Clients SHOULD prefer PT 2.0 over PT 1.0.
 
 Pluggable Transport names serve as unique identifiers, and every PT MUST have a unique name.
 PT names MUST be valid C identifiers. PT names MUST begin with a letter or underscore, and the remaining characters MUST be ASCII letters, numbers or underscores. No length limit is imposed.
-PT names MUST satisfy the regular expression "[a-zA-Z_][a-zA-Z0-9_]*".
+PT names MUST satisfy the regular expression \[a-zA-Z_\]\[a-zA-Z0-9_\]\*.
 
 ## Transports API Interface
 
 ### Goals for interface design
 
 The goal for the interface design is to achieve the following properties:
+
 - Transport implementers have to do the minimum amount of work in addition to
 implementing the core transform logic.
 - Transport users have to do the minimum amount of work to add PT support to code that
@@ -223,7 +232,7 @@ complexity and latency.
 - The interface in each language should be idiomatic and performant, including 
 reproducing blocking behavior and interaction with nonblocking IO subsystems when possible.
 
-###Abstract Interfaces
+### Abstract Interfaces
 This section presents high-level pseudocode descriptions of the interfaces exposed 
 by different types of transport components. Implementations for different languages 
 should provide equivalent functionality, but should use the idioms for each language, 
@@ -244,8 +253,10 @@ requires knowing the correct parameters to initialize that ​Transport.
 ##### Client Factory
 - Client Factory​ takes the ​connection settings​ and produces a ​Connection​ to that server.
 * The ​connection settings​ are specific to each transport. Some transports will also require an argument indicating the ​destination endpoint​. Producing a Connection​ may fail if the server is unreachable or if the ​transport configuration​ was incorrect.
+
 ##### Server Factory
 - Server Factory​ takes the address on which the PT server should listen for incoming client connections and produces a ​Listener​ for that address
+
 ##### Listener
 - Listener​ produces a stream of ​Connections
 * New ​Connections​ are available whenever an incoming connection from the PT
@@ -347,15 +358,3 @@ upon the “Pluggable Transport Specification (Version 1)” document authored b
 Angel (Tor). Inspiration for the PT 2.0 Go API was also inspired by the obfs4proxy 
 implementation of the PT 1.0 specification in Go, also developed by Yawning Angel (Tor).
  
-# Appendix A. Changelog
-## PT 2.1, Draft 1
-- Implemented proposal 0002 - Modularization of Specification
-
-## PT 2.0, Draft 3
-- Expanded acknowledgements section
-
-## PT 2.0, Draft 2
-- Reworded introduction
-- Removed unused Javascript and Python APIs
-- Removed SSH transport example
-- Standardized use of Transports API and Dispatcher IPC language throughout

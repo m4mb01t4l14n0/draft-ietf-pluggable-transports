@@ -1,4 +1,4 @@
-DRAFTS = irtf-oliver-pluggable-transports
+DRAFTS = irtf-oliver-pluggable-transports-00
 OUTPUTS = $(foreach draft,$(DRAFTS),draft-${draft}.html draft-${draft}.xml draft-${draft}.txt)
 STAGING = staging.xml
 

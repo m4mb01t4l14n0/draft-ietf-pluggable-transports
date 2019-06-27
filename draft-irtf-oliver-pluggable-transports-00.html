@@ -390,17 +390,15 @@
 <link href="#rfc.section.5.4" rel="Chapter" title="5.4 Anonymity Considerations">
 <link href="#rfc.section.6" rel="Chapter" title="6 References">
 <link href="#rfc.section.7" rel="Chapter" title="7 Acknowledgments">
-<link href="#rfc.section.8" rel="Chapter" title="8 Appendix A. Changelog">
-<link href="#rfc.section.8.1" rel="Chapter" title="8.1 PT 2.0, Draft 3">
-<link href="#rfc.section.8.2" rel="Chapter" title="8.2 PT 2.0, Draft 2">
+<link href="#rfc.references" rel="Chapter" title="8 Normative References">
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.22.3 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.9.9 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="David Oliver, ." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-oliver-pluggable-transports" />
+  <meta name="dct.creator" content="Oliver, D." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-irtf-oliver-pluggable-transports-00" />
   <meta name="dct.issued" scheme="ISO8601" content="2019-06-26" />
   <meta name="dct.abstract" content="Pluggable Transports (PTs) are a mechanism enabling the rapid development and deployment of network traffic obfuscation techniques used to circumvent surveillance and censorship. This specification does not define or limit the techniques themselves, but rather focuses on the startup, shutdown, and inter-process communication mechanisms required to make these technologies interoperable with applications." />
   <meta name="description" content="Pluggable Transports (PTs) are a mechanism enabling the rapid development and deployment of network traffic obfuscation techniques used to circumvent surveillance and censorship. This specification does not define or limit the techniques themselves, but rather focuses on the startup, shutdown, and inter-process communication mechanisms required to make these technologies interoperable with applications." />
@@ -413,8 +411,8 @@
     <tbody>
     
     	<tr>
-<td class="left">Transport Working Group</td>
-<td class="right">. David Oliver</td>
+<td class="left">Network Working Group</td>
+<td class="right">D. Oliver</td>
 </tr>
 <tr>
 <td class="left">Internet-Draft</td>
@@ -434,10 +432,11 @@
   </table>
 
   <p class="title">Enabling Network Traffic Obfuscation - Pluggable Transports<br />
-  <span class="filename">draft-oliver-pluggable-transports</span></p>
+  <span class="filename">draft-irtf-oliver-pluggable-transports-00</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
 <p>Pluggable Transports (PTs) are a mechanism enabling the rapid development and deployment of network traffic obfuscation techniques used to circumvent surveillance and censorship. This specification does not define or limit the techniques themselves, but rather focuses on the startup, shutdown, and inter-process communication mechanisms required to make these technologies interoperable with applications.</p>
+<p>This document is based heavily on <a href="#PT2.1" class="xref">[PT2.1]</a>.</p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
@@ -484,13 +483,9 @@
 </li>
 <li>7.   <a href="#rfc.section.7">Acknowledgments</a>
 </li>
-<li>8.   <a href="#rfc.section.8">Appendix A. Changelog</a>
+<li>8.   <a href="#rfc.references">Normative References</a>
 </li>
-<ul><li>8.1.   <a href="#rfc.section.8.1">PT 2.0, Draft 3</a>
-</li>
-<li>8.2.   <a href="#rfc.section.8.2">PT 2.0, Draft 2</a>
-</li>
-</ul><li><a href="#rfc.authors">Author's Address</a>
+<li><a href="#rfc.authors">Author's Address</a>
 </li>
 
 
@@ -502,10 +497,8 @@
 <p id="rfc.section.1.p.1">The increased interest in network traffic obfuscation technologies mirrors the increase in usage Deep Packet Inspection (DPI) to actively monitor the content of application data in addition to that data&#8217;s routing information.  Deep Packet Inspection inspects each packet based on the header of its request and the data it carries. It can identify the type of protocol the connection is using even if it was encrypted. DPI is not a mechanism to decrypt what is inside packets but to identify the &#8216;protocol&#8217; or the application it represents.</p>
 <p id="rfc.section.1.p.2">Deep packet inspection has become the prime tool of censors and surveillance entities who block, log and/or traffic-shape access to sites and services they deem undesirable.<br> As deep packet inspection has become more routine, the sophistication of monitoring has increased to include active probing that fingerprints and classifies application protocols.  Thus, even as conventional care in application design has improved (via encryption and other protocol design features that encourage privacy), network traffic is still under attack.</p>
 <p id="rfc.section.1.p.3">The techniques of network monitoring are changing and improving day by day.  The development of traffic obfuscation techniques that foil these efforts is slowed by the lack of common agreement on how these techniques are invoked, made easily interoperable with applications, and deployed quickly.  This specification addresses those issues.</p>
-<pre>
-    &lt;!-- taken largely from PT1 spec --&gt; This specification describes a method for decoupling protocol-level obfuscation from  an application's client/server code, in a manner that promotes rapid development  of obfuscation/circumvention tools and promotes reuse across privacy tools such as VPNs and secure proxies.
-</pre>
-<p id="rfc.section.1.p.4">This decoupling is accomplished by utilizing helper sub-processes that implement the necessary forward/reverse proxy servers that handle the censorship circumvention, with a well defined and standardized configuration and management interface. Any application code that implements the interfaces as specified in this document will be able to use all spec compliant Pluggable Transports.</p>
+<p id="rfc.section.1.p.4">This specification describes a method for decoupling protocol-level obfuscation from an application&#8217;s client/server code, in a manner that promotes rapid development of obfuscation/circumvention tools and promotes reuse across privacy tools such as VPNs and secure proxies.</p>
+<p id="rfc.section.1.p.5">This decoupling is accomplished by utilizing helper sub-processes that implement the necessary forward/reverse proxy servers that handle the censorship circumvention, with a well defined and standardized configuration and management interface. Any application code that implements the interfaces as specified in this document will be able to use all spec compliant Pluggable Transports.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#background" id="background">Background</a>
 </h1>
@@ -519,12 +512,12 @@
 </ol>
 <p id="rfc.section.2.p.3">These techniques are applicable to a connection&#8217;s metadata (IP routing information) and do not require inspecting the connection&#8217;s datastream.</p>
 <p id="rfc.section.2.p.4">DPI, in contrast, actually looks at the connection&#8217;s datastream - often, specifically, the initial data elements in the stream (or within blocks of the stream).  These elements of the stream can contain clues as to the application-level protocol employed, even when the data itself is encrypted.  With repeated exposure, these clues (&#8220;fingerprints&#8221;) can be learned by the censor and (along with the routing information) used to block or divert targeted traffic.</p>
-<p id="rfc.section.2.p.5">A defense against this type of active probing is traffic obfuscation - disguising the application data itself in a manner that is less-easily fingerprinted.  But in early experiments, it quickly became clear that repeated use of the same obfuscation technique would, itself, be learned. Methods were developed by which a single obfuscation technique could transform on its own [cite FTE proxy, ScrambleSuit].  But, this approach proved expensive in terms of computational load.  Interest gathered in solving this problem and as more ideas arose so to did the need for a mechanism supporting rapid deploying of new obfuscation techniques.</p>
+<p id="rfc.section.2.p.5">A defense against this type of active probing is traffic obfuscation - disguising the application data itself in a manner that is less-easily fingerprinted.  But in early experiments, it quickly became clear that repeated use of the same obfuscation technique would, itself, be learned. Methods were developed by which a single obfuscation technique could transform on its own TODO: cite FTE proxy, ScrambleSuit.  But, this approach proved expensive in terms of computational load.  Interest gathered in solving this problem and as more ideas arose so to did the need for a mechanism supporting rapid deploying of new obfuscation techniques.</p>
 <p id="rfc.section.2.p.6">While intense work on network traffic obfuscation commenced initially and continues within the Tor Project (and across a wider set of external parties using Tor as a vehicle for research), vendors of other privacy-enhancing software (such as VPNs) quickly found their products also foiled by DPI.  Thus, it becomes important to see transport plug-ability as a mechanism implemented in a manner independent of a specific product or service.  The notion of &#8220;Pluggable Transports&#8221; (PT) was born from these requirements.</p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#architecture-overview" id="architecture-overview">Architecture Overview</a>
 </h1>
-<p id="rfc.section.3.p.1">The PT Server software exposes a public proxy that accepts connections from PT Clients.  The PT Client transforms the traffic before it hits the public Internet and the PT Server reverses this transformation before passing the traffic on to its next destination.  By default, the PT Server directly forwards this data to the Server App, but the Server App itself may itself be a proxy server and expect the forwarded traffic it receives to conform to a proxy communication protocol such as SOCKS or TURN. There is also an optional lightweight protocol to facilitate communicating connection metadata that would otherwise be lost such as the source IP address and port [EXTORPORT].</p>
+<p id="rfc.section.3.p.1">The PT Server software exposes a public proxy that accepts connections from PT Clients.  The PT Client transforms the traffic before it hits the public Internet and the PT Server reverses this transformation before passing the traffic on to its next destination.  By default, the PT Server directly forwards this data to the Server App, but the Server App itself may itself be a proxy server and expect the forwarded traffic it receives to conform to a proxy communication protocol such as SOCKS or TURN. There is also an optional lightweight protocol to facilitate communicating connection metadata that would otherwise be lost such as the source IP address and port EXTORPORT.</p>
 <p id="rfc.section.3.p.2">When using the API on both client and server (&#8220;Transport API Interface&#8221;), the PT Client Library is integrated directly into the Client App and the PT Server Library is integrated directly into the Server App. The Client App and Server App communicate through socket-like APIs, with all communication between them going through the PT library, which only sends transformed traffic over the public Internet.</p>
 <pre>
   +------------+                     +---------------------------+
@@ -578,14 +571,26 @@
 <h1 id="rfc.section.4.1">
 <a href="#rfc.section.4.1">4.1.</a> <a href="#pluggable-transport-naming" id="pluggable-transport-naming">Pluggable Transport Naming</a>
 </h1>
-<p id="rfc.section.4.1.p.1">Pluggable Transport names serve as unique identifiers, and every PT MUST have a unique name.  PT names MUST be valid C identifiers. PT names MUST begin with a letter or underscore, and the remaining characters MUST be ASCII letters, numbers or underscores. No length limit is imposed.  PT names MUST satisfy the regular expression &#8220;[a-zA-Z_][a-zA-Z0-9_]*&#8221;.</p>
+<p id="rfc.section.4.1.p.1">Pluggable Transport names serve as unique identifiers, and every PT MUST have a unique name.  PT names MUST be valid C identifiers. PT names MUST begin with a letter or underscore, and the remaining characters MUST be ASCII letters, numbers or underscores. No length limit is imposed.  PT names MUST satisfy the regular expression [a-zA-Z_][a-zA-Z0-9_]*.</p>
 <h1 id="rfc.section.4.2">
 <a href="#rfc.section.4.2">4.2.</a> <a href="#transports-api-interface" id="transports-api-interface">Transports API Interface</a>
 </h1>
 <h1 id="rfc.section.4.2.1">
 <a href="#rfc.section.4.2.1">4.2.1.</a> <a href="#goals-for-interface-design" id="goals-for-interface-design">Goals for interface design</a>
 </h1>
-<p id="rfc.section.4.2.1.p.1">The goal for the interface design is to achieve the following properties: - Transport implementers have to do the minimum amount of work in addition to implementing the core transform logic.  - Transport users have to do the minimum amount of work to add PT support to code that uses standard networking primitives from the language or platform.  - Transports require an explicit destination address to be specified. However, this can be either an explicit PT server destination with the Server App is already known implicitly (the case with obfs4), or an explicit Server App destination with the PT server destination already known implicity (the case with meek).  - Transports may or may not generate, send, receive, store, and/or update persistent or ephemeral state.  * Transports that do not need persistence or negotiation can interact with the application through the simplest possible interface * Transports that do need persistence or negotiation can rely on the application to provide it through the specified interface, so the transport does not need to implement persistence or negotiation internally.  - Applications should be able to use a PT Client implementation to establish several independent transport connections with different parameters, with a minimum of complexity and latency.  - The interface in each language should be idiomatic and performant, including reproducing blocking behavior and interaction with nonblocking IO subsystems when possible.</p>
+<p id="rfc.section.4.2.1.p.1">The goal for the interface design is to achieve the following properties:</p>
+<p></p>
+
+<ul>
+<li>Transport implementers have to do the minimum amount of work in addition to implementing the core transform logic.</li>
+<li>Transport users have to do the minimum amount of work to add PT support to code that uses standard networking primitives from the language or platform.</li>
+<li>Transports require an explicit destination address to be specified. However, this can be either an explicit PT server destination with the Server App is already known implicitly (the case with obfs4), or an explicit Server App destination with the PT server destination already known implicity (the case with meek).</li>
+<li>Transports may or may not generate, send, receive, store, and/or update persistent or ephemeral state.</li>
+<li>Transports that do not need persistence or negotiation can interact with the application through the simplest possible interface</li>
+<li>Transports that do need persistence or negotiation can rely on the application to provide it through the specified interface, so the transport does not need to implement persistence or negotiation internally.</li>
+<li>Applications should be able to use a PT Client implementation to establish several independent transport connections with different parameters, with a minimum of complexity and latency.</li>
+<li>The interface in each language should be idiomatic and performant, including reproducing blocking behavior and interaction with nonblocking IO subsystems when possible.</li>
+</ul>
 <h1 id="rfc.section.4.2.2">
 <a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#abstract-interfaces" id="abstract-interfaces">Abstract Interfaces</a>
 </h1>
@@ -609,8 +614,20 @@
 
 <ul>
 <li>Client Factory&#8203; takes the &#8203;connection settings&#8203; and produces a &#8203;Connection&#8203; to that server.</li>
-<li>The &#8203;connection settings&#8203; are specific to each transport. Some transports will also require an argument indicating the &#8203;destination endpoint&#8203;. Producing a Connection&#8203; may fail if the server is unreachable or if the &#8203;transport configuration&#8203; was incorrect.  ##### Server Factory</li>
-<li>Server Factory&#8203; takes the address on which the PT server should listen for incoming client connections and produces a &#8203;Listener&#8203; for that address ##### Listener</li>
+<li>The &#8203;connection settings&#8203; are specific to each transport. Some transports will also require an argument indicating the &#8203;destination endpoint&#8203;. Producing a Connection&#8203; may fail if the server is unreachable or if the &#8203;transport configuration&#8203; was incorrect.</li>
+</ul>
+<h1 id="rfc.section.4.2.2.1.2">
+<a href="#rfc.section.4.2.2.1.2">4.2.2.1.2.</a> <a href="#server-factory" id="server-factory">Server Factory</a>
+</h1>
+<p></p>
+
+<ul><li>Server Factory&#8203; takes the address on which the PT server should listen for incoming client connections and produces a &#8203;Listener&#8203; for that address</li></ul>
+<h1 id="rfc.section.4.2.2.1.3">
+<a href="#rfc.section.4.2.2.1.3">4.2.2.1.3.</a> <a href="#listener" id="listener">Listener</a>
+</h1>
+<p></p>
+
+<ul>
 <li>Listener&#8203; produces a stream of &#8203;Connections</li>
 <li>New &#8203;Connections&#8203; are available whenever an incoming connection from the PT client has been established. The language-specific API can adopt either a blocking or non-blocking API for accepting new connections, depending on what is idiomatic for the language.  3.2.2.2. Connection</li>
 <li>Connection&#8203; provides an API similar to the environment&#8217;s native socket type</li>
@@ -656,34 +673,19 @@
 <a href="#rfc.section.7">7.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
 </h1>
 <p id="rfc.section.7.p.1">Many people contributed to the PT 2.0 specification. Major contributions were made by Dr. Brandon Wiley (Operator Foundation), Nick Mathewson (Tor), and Ben Schwartz (Jigsaw).  Valuable feedback was provided by the attendees at the Pluggable Transport Implementers Meetings and the traffic-obf and tor-dev mailing lists. The PT 2.0 specification expands upon the &#8220;Pluggable Transport Specification (Version 1)&#8221; document authored by Yawning Angel (Tor). Inspiration for the PT 2.0 Go API was also inspired by the obfs4proxy implementation of the PT 1.0 specification in Go, also developed by Yawning Angel (Tor).</p>
-<h1 id="rfc.section.8">
-<a href="#rfc.section.8">8.</a> <a href="#appendix-a-changelog" id="appendix-a-changelog">Appendix A. Changelog</a>
-</h1>
-<p id="rfc.section.8.p.1">## PT 2.1, Draft 1 - Implemented proposal 0002 - Modularization of Specification</p>
-<h1 id="rfc.section.8.1">
-<a href="#rfc.section.8.1">8.1.</a> <a href="#pt-20-draft-3" id="pt-20-draft-3">PT 2.0, Draft 3</a>
-</h1>
-<p></p>
-
-<ul><li>Expanded acknowledgements section</li></ul>
-<h1 id="rfc.section.8.2">
-<a href="#rfc.section.8.2">8.2.</a> <a href="#pt-20-draft-2" id="pt-20-draft-2">PT 2.0, Draft 2</a>
-</h1>
-<p></p>
-
-<ul>
-<li>Reworded introduction</li>
-<li>Removed unused Javascript and Python APIs</li>
-<li>Removed SSH transport example</li>
-<li>Standardized use of Transports API and Dispatcher IPC language throughout</li>
-</ul>
+<h1 id="rfc.references">
+<a href="#rfc.references">8.</a> Normative References</h1>
+<table><tbody><tr>
+<td class="reference"><b id="PT2.1">[PT2.1]</b></td>
+<td class="top">"<a href="https://github.com/Pluggable-Transports/Pluggable-Transports-spec/blob/master/releases/PTSpecV2.1Draft1/Pluggable%20Transport%20Specification%20v2.1%20-%20Base%20Specification%20v2.1%2C%20Draft%201.pdf">Pluggable Transport Base Specification</a>", 2018.</td>
+</tr></tbody></table>
 <h1 id="rfc.authors"><a href="#rfc.authors">Author's Address</a></h1>
 <div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
 	  <span class="fn">David M. Oliver</span> 
 	  <span class="n hidden">
-		<span class="family-name">David Oliver</span>
+		<span class="family-name">Oliver</span>
 	  </span>
 	</span>
 	<span class="org vcardline">Guardian Project</span>
