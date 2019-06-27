@@ -1,11 +1,8 @@
 ---
-title: Enabling Network Traffic Obfuscation: Pluggable Transports
+title: Enabling Network Traffic Obfuscation - Pluggable Transports
 abbrev: Pluggable Transports
-docname: draft-oliver-pluggable-transports
+docname: draft-irtf-oliver-pluggable-transports
 category: info
-category: Computer-Communication Networks: Network Protocols 
-category: Computer-Communication Networks: General—Security and protection 
-category: Computers And Society: Public Policy Issues—Privacy
 
 ipr: trust200902
 area: General
@@ -30,7 +27,6 @@ author:
     uri: https://guardianproject.info
 
 normative:
-RFC2119:
 
 informative:
 
@@ -80,13 +76,6 @@ necessary forward/reverse proxy servers that handle the censorship circumvention
 with a well defined and standardized configuration and management interface. Any 
 application code that implements the interfaces as specified in this document 
 will be able to use all spec compliant Pluggable Transports.
-
-# Conventions and Definitions
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14 {{RFC2119}} {{!RFC8174}}
-when, and only when, they appear in all capitals, as shown here.
 
 # Background
 
