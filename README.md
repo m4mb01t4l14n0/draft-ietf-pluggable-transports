@@ -1,5 +1,7 @@
-# draft-ietf-pluggable-transports
+# draft-irtf-oliver-pluggable-transports
 Working document for IETF Internet Draft "Pluggable Transports"
+
+**Note:** draft-\*.md is the working source. XML, TXT and HTML are generated sources that are checked into git for ready reference.
 
 ## Tooling to build the drafts
 

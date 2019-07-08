@@ -375,33 +375,35 @@
 
   <link href="#rfc.toc" rel="Contents">
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
-<link href="#rfc.section.2" rel="Chapter" title="2 Background">
-<link href="#rfc.section.3" rel="Chapter" title="3 Architecture Overview">
-<link href="#rfc.section.4" rel="Chapter" title="4 Specification">
-<link href="#rfc.section.4.1" rel="Chapter" title="4.1 Pluggable Transport Naming">
-<link href="#rfc.section.4.2" rel="Chapter" title="4.2 Transports API Interface">
-<link href="#rfc.section.4.2.1" rel="Chapter" title="4.2.1 Goals for interface design">
-<link href="#rfc.section.4.2.2" rel="Chapter" title="4.2.2 Abstract Interfaces">
-<link href="#rfc.section.5" rel="Chapter" title="5 Adapters">
-<link href="#rfc.section.5.1" rel="Chapter" title="5.1 API to IPC Adapter">
-<link href="#rfc.section.5.2" rel="Chapter" title="5.2 PT 1.0 Compatibility">
-<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Cross-language Linking">
-<link href="#rfc.section.5.3.1" rel="Chapter" title="5.3.1 Using the Dispatcher IPC Interface In-process">
-<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Anonymity Considerations">
-<link href="#rfc.section.6" rel="Chapter" title="6 References">
-<link href="#rfc.section.7" rel="Chapter" title="7 Acknowledgments">
-<link href="#rfc.references" rel="Chapter" title="8 Normative References">
+<link href="#rfc.section.2" rel="Chapter" title="2 Conventions and Definitions">
+<link href="#rfc.section.3" rel="Chapter" title="3 Background">
+<link href="#rfc.section.4" rel="Chapter" title="4 Architecture Overview">
+<link href="#rfc.section.5" rel="Chapter" title="5 Specification">
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Pluggable Transport Naming">
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Transports API Interface">
+<link href="#rfc.section.5.2.1" rel="Chapter" title="5.2.1 Goals for interface design">
+<link href="#rfc.section.5.2.2" rel="Chapter" title="5.2.2 Abstract Interfaces">
+<link href="#rfc.section.6" rel="Chapter" title="6 Adapters">
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 API to IPC Adapter">
+<link href="#rfc.section.6.2" rel="Chapter" title="6.2 PT 1.0 Compatibility">
+<link href="#rfc.section.6.3" rel="Chapter" title="6.3 Cross-language Linking">
+<link href="#rfc.section.6.3.1" rel="Chapter" title="6.3.1 Using the Dispatcher IPC Interface In-process">
+<link href="#rfc.section.6.4" rel="Chapter" title="6.4 Anonymity Considerations">
+<link href="#rfc.references" rel="Chapter" title="7 References">
+<link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References">
+<link href="#rfc.acknowledgments" rel="Chapter">
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.23.1 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.9.9 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="Oliver, D. and B. Wiley" />
+  <meta name="dct.creator" content="Wiley, B. and D. Oliver" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-irtf-oliver-pluggable-transports-00" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-06-26" />
-  <meta name="dct.abstract" content="Pluggable Transports (PTs) are a mechanism enabling the rapid development and deployment of network traffic obfuscation techniques used to circumvent surveillance and censorship. This specification does not define or limit the techniques themselves, but rather focuses on the startup, shutdown, and inter-process communication mechanisms required to make these technologies interoperable with applications.This document is based heavily on ." />
-  <meta name="description" content="Pluggable Transports (PTs) are a mechanism enabling the rapid development and deployment of network traffic obfuscation techniques used to circumvent surveillance and censorship. This specification does not define or limit the techniques themselves, but rather focuses on the startup, shutdown, and inter-process communication mechanisms required to make these technologies interoperable with applications.This document is based heavily on ." />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-07-08" />
+  <meta name="dct.abstract" content="Pluggable Transports (PTs) are a mechanism enabling the rapid development and deployment of network traffic obfuscation techniques used to circumvent surveillance and censorship. This specification does not define or limit the techniques themselves, but rather focuses on the startup, shutdown, and inter-process communication mechanisms required to make these technologies interoperable with applications." />
+  <meta name="description" content="Pluggable Transports (PTs) are a mechanism enabling the rapid development and deployment of network traffic obfuscation techniques used to circumvent surveillance and censorship. This specification does not define or limit the techniques themselves, but rather focuses on the startup, shutdown, and inter-process communication mechanisms required to make these technologies interoperable with applications." />
 
 </head>
 
@@ -412,23 +414,23 @@
     
     	<tr>
 <td class="left">Network Working Group</td>
-<td class="right">D. Oliver</td>
-</tr>
-<tr>
-<td class="left">Internet-Draft</td>
-<td class="right">Guardian Project</td>
-</tr>
-<tr>
-<td class="left">Intended status: Informational</td>
 <td class="right">B. Wiley</td>
 </tr>
 <tr>
-<td class="left">Expires: December 28, 2019</td>
+<td class="left">Internet-Draft</td>
 <td class="right">Operator Foundation</td>
 </tr>
 <tr>
+<td class="left">Intended status: Informational</td>
+<td class="right">D. Oliver</td>
+</tr>
+<tr>
+<td class="left">Expires: January 9, 2020</td>
+<td class="right">Guardian Project</td>
+</tr>
+<tr>
 <td class="left"></td>
-<td class="right">June 26, 2019</td>
+<td class="right">July 08, 2019</td>
 </tr>
 
     	
@@ -445,7 +447,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on December 28, 2019.</p>
+<p>This Internet-Draft will expire on January 9, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -457,37 +459,41 @@
 
   	<li>1.   <a href="#rfc.section.1">Introduction</a>
 </li>
-<li>2.   <a href="#rfc.section.2">Background</a>
+<li>2.   <a href="#rfc.section.2">Conventions and Definitions</a>
 </li>
-<li>3.   <a href="#rfc.section.3">Architecture Overview</a>
+<li>3.   <a href="#rfc.section.3">Background</a>
 </li>
-<li>4.   <a href="#rfc.section.4">Specification</a>
+<li>4.   <a href="#rfc.section.4">Architecture Overview</a>
 </li>
-<ul><li>4.1.   <a href="#rfc.section.4.1">Pluggable Transport Naming</a>
+<li>5.   <a href="#rfc.section.5">Specification</a>
 </li>
-<li>4.2.   <a href="#rfc.section.4.2">Transports API Interface</a>
+<ul><li>5.1.   <a href="#rfc.section.5.1">Pluggable Transport Naming</a>
 </li>
-<ul><li>4.2.1.   <a href="#rfc.section.4.2.1">Goals for interface design</a>
+<li>5.2.   <a href="#rfc.section.5.2">Transports API Interface</a>
 </li>
-<li>4.2.2.   <a href="#rfc.section.4.2.2">Abstract Interfaces</a>
+<ul><li>5.2.1.   <a href="#rfc.section.5.2.1">Goals for interface design</a>
 </li>
-</ul></ul><li>5.   <a href="#rfc.section.5">Adapters</a>
+<li>5.2.2.   <a href="#rfc.section.5.2.2">Abstract Interfaces</a>
 </li>
-<ul><li>5.1.   <a href="#rfc.section.5.1">API to IPC Adapter</a>
+</ul></ul><li>6.   <a href="#rfc.section.6">Adapters</a>
 </li>
-<li>5.2.   <a href="#rfc.section.5.2">PT 1.0 Compatibility</a>
+<ul><li>6.1.   <a href="#rfc.section.6.1">API to IPC Adapter</a>
 </li>
-<li>5.3.   <a href="#rfc.section.5.3">Cross-language Linking</a>
+<li>6.2.   <a href="#rfc.section.6.2">PT 1.0 Compatibility</a>
 </li>
-<ul><li>5.3.1.   <a href="#rfc.section.5.3.1">Using the Dispatcher IPC Interface In-process</a>
+<li>6.3.   <a href="#rfc.section.6.3">Cross-language Linking</a>
 </li>
-</ul><li>5.4.   <a href="#rfc.section.5.4">Anonymity Considerations</a>
+<ul><li>6.3.1.   <a href="#rfc.section.6.3.1">Using the Dispatcher IPC Interface In-process</a>
 </li>
-</ul><li>6.   <a href="#rfc.section.6">References</a>
+</ul><li>6.4.   <a href="#rfc.section.6.4">Anonymity Considerations</a>
 </li>
-<li>7.   <a href="#rfc.section.7">Acknowledgments</a>
+</ul><li>7.   <a href="#rfc.references">References</a>
 </li>
-<li>8.   <a href="#rfc.references">Normative References</a>
+<ul><li>7.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>7.2.   <a href="#rfc.references.2">Informative References</a>
+</li>
+</ul><li><a href="#rfc.acknowledgments">Acknowledgments</a>
 </li>
 <li><a href="#rfc.authors">Authors' Addresses</a>
 </li>
@@ -504,9 +510,13 @@
 <p id="rfc.section.1.p.4">This specification describes a method for decoupling protocol-level obfuscation from an application&#8217;s client/server code, in a manner that promotes rapid development of obfuscation/circumvention tools and promotes reuse across privacy tools such as VPNs and secure proxies.</p>
 <p id="rfc.section.1.p.5">This decoupling is accomplished by utilizing helper code, either in-process through a language-specific API or in a separate sub-processes, that implements the necessary forward/reverse proxy services that handle the censorship circumvention, with a well defined and standardized configuration and management interface. Any application code that implements the interfaces as specified in this document will be able to use all specification-compliant Pluggable Transports.</p>
 <h1 id="rfc.section.2">
-<a href="#rfc.section.2">2.</a> <a href="#background" id="background">Background</a>
+<a href="#rfc.section.2">2.</a> <a href="#conventions-and-definitions" id="conventions-and-definitions">Conventions and Definitions</a>
 </h1>
-<p id="rfc.section.2.p.1">We define an Internet censor as any network intermediary that seeks to block, divert or traffic-manage Internet network connections for the purpose of eliminating, frustrating and/or logging access to Internet resources that have been deemed (by the censor) to be undesirable (either on a temporary or permanent basis).  A variety of techniques are commonly applied by Internet censors to block such traffic.  These include:</p>
+<p id="rfc.section.2.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in BCP 14 <a href="#RFC2119" class="xref">[RFC2119]</a> <a href="#RFC8174" class="xref">[RFC8174]</a> when, and only when, they appear in all capitals, as shown here.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#background" id="background">Background</a>
+</h1>
+<p id="rfc.section.3.p.1">We define an Internet censor as any network intermediary that seeks to block, divert or traffic-manage Internet network connections for the purpose of eliminating, frustrating and/or logging access to Internet resources that have been deemed (by the censor) to be undesirable (either on a temporary or permanent basis).  A variety of techniques are commonly applied by Internet censors to block such traffic.  These include:</p>
 <p></p>
 
 <ol>
@@ -514,15 +524,15 @@
 <li>IP Blocking</li>
 <li>Port Blocking</li>
 </ol>
-<p id="rfc.section.2.p.3">These techniques are applicable to a connection&#8217;s metadata (IP routing information) and do not require inspecting the connection&#8217;s datastream.</p>
-<p id="rfc.section.2.p.4">DPI, in contrast, actually looks at the connection&#8217;s datastream - often, specifically, the initial data elements in the stream (or within blocks of the stream).  These elements of the stream can contain clues as to the application-level protocol employed, even when the data itself is encrypted.  Through observation over time, these clues (&#8220;fingerprints&#8221;) can be learned by the censor and (along with the routing information) used to block or divert targeted traffic.</p>
-<p id="rfc.section.2.p.5">A defense against this type of active probing is traffic obfuscation - disguising the application data itself in a manner that is less-easily fingerprinted.  However, in early experiments it quickly became clear that repeated use of the same obfuscation technique would, itself, be learned. Methods were developed by which a single obfuscation technique could transform on its own TODO: cite FTE proxy, ScrambleSuit, Dust.  This approach proved expensive in terms of computational load.  Interest gathered in solving this problem and as more ideas arose so to did the need for a mechanism supporting rapid deploying of new obfuscation techniques.</p>
-<p id="rfc.section.2.p.6">While intense work on network traffic obfuscation commenced initially and continues within the Tor Project (and across a wider set of external parties using Tor as a vehicle for research), vendors of other privacy-enhancing software (such as VPNs) quickly found their products also foiled by DPI.  Thus, it becomes important to see transport plugability as a mechanism implemented in a manner independent of a specific product or service.  The notion of &#8220;Pluggable Transports&#8221; (PT) was born from these requirements.</p>
-<h1 id="rfc.section.3">
-<a href="#rfc.section.3">3.</a> <a href="#architecture-overview" id="architecture-overview">Architecture Overview</a>
+<p id="rfc.section.3.p.3">These techniques are applicable to a connection&#8217;s metadata (IP routing information) and do not require inspecting the connection&#8217;s datastream.</p>
+<p id="rfc.section.3.p.4">DPI, in contrast, actually looks at the connection&#8217;s datastream - often, specifically, the initial data elements in the stream (or within blocks of the stream).  These elements of the stream can contain clues as to the application-level protocol employed, even when the data itself is encrypted.  Through observation over time, these clues (&#8220;fingerprints&#8221;) can be learned by the censor and (along with the routing information) used to block or divert targeted traffic.</p>
+<p id="rfc.section.3.p.5">A defense against this type of active probing is traffic obfuscation - disguising the application data itself in a manner that is less-easily fingerprinted.  However, in early experiments it quickly became clear that repeated use of the same obfuscation technique would, itself, be learned. Methods were developed by which a single obfuscation technique could transform on its own TODO: cite FTE proxy, ScrambleSuit, Dust. This approach proved expensive in terms of computational load.  Interest gathered in solving this problem and as more ideas arose so to did the need for a mechanism supporting rapid deploying of new obfuscation techniques.</p>
+<p id="rfc.section.3.p.6">While intense work on network traffic obfuscation commenced initially and continues within the Tor Project (and across a wider set of external parties using Tor as a vehicle for research), vendors of other privacy-enhancing software (such as VPNs) quickly found their products also foiled by DPI.  Thus, it becomes important to see transport pluggability as a mechanism implemented in a manner independent of a specific product or service.  The notion of &#8220;Pluggable Transports&#8221; (PT) was born from these requirements.</p>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#architecture-overview" id="architecture-overview">Architecture Overview</a>
 </h1>
-<p id="rfc.section.3.p.1">The PT Server software exposes a public proxy that accepts connections from PT Clients.  The PT Client transforms the traffic before it hits the public Internet and the PT Server reverses this transformation before passing the traffic on to its next destination.  The PT Server directly forwards this data to the Server App, but the Server App itself may itself be a proxy server and expect the forwarded traffic it receives to conform to a proxy communication protocol such as SOCKS or TURN. There is also an optional lightweight protocol to facilitate communicating connection metadata that would otherwise be lost such as the source IP address and port EXTORPORT.</p>
-<p id="rfc.section.3.p.2">When using an in-process, language-specific API (&#8220;Transport API Interface&#8221;) to integrate PTs into an application on both client and server, the PT Client Library is integrated directly into the Client App and the PT Server Library is integrated directly into the Server App. The Client App and Server App communicate through socket-like APIs, with all communication between them going through the PT library, which only sends transformed traffic over the public Internet.</p>
+<p id="rfc.section.4.p.1">The PT Server software exposes a public proxy that accepts connections from PT Clients.  The PT Client transforms the traffic before it hits the public Internet and the PT Server reverses this transformation before passing the traffic on to its next destination.  The PT Server directly forwards this data to the Server App, but the Server App itself may itself be a proxy server and expect the forwarded traffic it receives to conform to a proxy communication protocol such as SOCKS or TURN. There is also an optional lightweight protocol to facilitate communicating connection metadata that would otherwise be lost such as the source IP address and port EXTORPORT.</p>
+<p id="rfc.section.4.p.2">When using an in-process, language-specific API (&#8220;Transport API Interface&#8221;) to integrate PTs into an application on both client and server, the PT Client Library is integrated directly into the Client App and the PT Server Library is integrated directly into the Server App. The Client App and Server App communicate through socket-like APIs, with all communication between them going through the PT library, which only sends transformed traffic over the public Internet.</p>
 <pre>
   +------------+                     +---------------------------+
   | Client App +-- Socket-like API --+ PT Client (Library)       +--+ 
@@ -536,7 +546,7 @@
   
            Figure 1. API Architecture Overview
 </pre>
-<p id="rfc.section.3.p.3">When using the transports as a separate process on both client and server, the Dispatcher IPC Interface is used. On the client device, the PT Client software exposes a local proxy to the client application, and transforms traffic before forwarding it to the PT Server. The PT Dispatcher can be configured to provide different proxy types, supporting proxying of both TCP and UDP traffic.</p>
+<p id="rfc.section.4.p.3">When using the transports as a separate process on both client and server, the Dispatcher IPC Interface is used. On the client device, the PT Client software exposes a local proxy to the client application, and transforms traffic before forwarding it to the PT Server. The PT Dispatcher can be configured to provide different proxy types, supporting proxying of both TCP and UDP traffic.</p>
 <pre>
   +------------+                     +---------------------------+
   | Client App +---- Local Proxy ----+ PT Client (Dispatcher)    +--+ 
@@ -554,7 +564,7 @@
 
         Figure 2. IPC Architecture Overview
 </pre>
-<p id="rfc.section.3.p.4">A PT client-server setup may also mix and match interfaces, using Dispatcher IPC on one end of the connection and the Transport API on the other, as below (or vice-versa):</p>
+<p id="rfc.section.4.p.4">A PT client-server setup may also mix and match interfaces, using Dispatcher IPC on one end of the connection and the Transport API on the other, as below (or vice-versa):</p>
 <pre>
   +------------+                     +---------------------------+
   | Client App +---- Local Proxy ----+ PT Dispatcher Client      +-+ 
@@ -567,22 +577,22 @@
 
         Figure 3. Mixed IPC and Transport API example
 </pre>
-<p id="rfc.section.3.p.5">Each invocation of a PT MUST be either a client OR a server.</p>
-<p id="rfc.section.3.p.6">PT dispatchers MAY support any of the following proxy modes: PT 1.0 with SOCKS4, PT 1.0 with SOCKS5, or any of the PT 2.1 modes: transparent TCP, transparent UDP, or STUN-aware UDP.  Clients SHOULD prefer PT 2.1 over PT 1.0.</p>
-<h1 id="rfc.section.4">
-<a href="#rfc.section.4">4.</a> <a href="#specification" id="specification">Specification</a>
+<p id="rfc.section.4.p.5">Each invocation of a PT MUST be either a client OR a server.</p>
+<p id="rfc.section.4.p.6">PT dispatchers MAY support any of the following proxy modes: PT 1.0 with SOCKS4, PT 1.0 with SOCKS5, or any of the PT 2.1 modes: transparent TCP, transparent UDP, or STUN-aware UDP.  Clients SHOULD prefer PT 2.1 over PT 1.0.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#specification" id="specification">Specification</a>
 </h1>
-<h1 id="rfc.section.4.1">
-<a href="#rfc.section.4.1">4.1.</a> <a href="#pluggable-transport-naming" id="pluggable-transport-naming">Pluggable Transport Naming</a>
+<h1 id="rfc.section.5.1">
+<a href="#rfc.section.5.1">5.1.</a> <a href="#pluggable-transport-naming" id="pluggable-transport-naming">Pluggable Transport Naming</a>
 </h1>
-<p id="rfc.section.4.1.p.1">Pluggable Transport names serve as unique identifiers, and every PT MUST have a unique name.  PT names MUST be valid C identifiers, which means that PT names MUST begin with a letter or underscore, and the remaining characters MUST be ASCII letters, numbers or underscores. No length limit is imposed.  PT names MUST therefore satisfy the regular expression [a-zA-Z_][a-zA-Z0-9_]*.</p>
-<h1 id="rfc.section.4.2">
-<a href="#rfc.section.4.2">4.2.</a> <a href="#transports-api-interface" id="transports-api-interface">Transports API Interface</a>
+<p id="rfc.section.5.1.p.1">Pluggable Transport names serve as unique identifiers, and every PT MUST have a unique name.  PT names MUST be valid C identifiers, which means that PT names MUST begin with a letter or underscore, and the remaining characters MUST be ASCII letters, numbers or underscores. No length limit is imposed.  PT names MUST therefore satisfy the regular expression [a-zA-Z_][a-zA-Z0-9_]*.</p>
+<h1 id="rfc.section.5.2">
+<a href="#rfc.section.5.2">5.2.</a> <a href="#transports-api-interface" id="transports-api-interface">Transports API Interface</a>
 </h1>
-<h1 id="rfc.section.4.2.1">
-<a href="#rfc.section.4.2.1">4.2.1.</a> <a href="#goals-for-interface-design" id="goals-for-interface-design">Goals for interface design</a>
+<h1 id="rfc.section.5.2.1">
+<a href="#rfc.section.5.2.1">5.2.1.</a> <a href="#goals-for-interface-design" id="goals-for-interface-design">Goals for interface design</a>
 </h1>
-<p id="rfc.section.4.2.1.p.1">The goal for the interface design is to achieve the following properties:</p>
+<p id="rfc.section.5.2.1.p.1">The goal for the interface design is to achieve the following properties:</p>
 <p></p>
 
 <ul>
@@ -595,12 +605,12 @@
 <li>Applications should be able to use a PT Client implementation to establish several independent transport connections with different parameters, with a minimum of complexity and latency.</li>
 <li>The interface in each language should be idiomatic and performant, including reproducing blocking behavior and interaction with nonblocking IO subsystems when possible.</li>
 </ul>
-<h1 id="rfc.section.4.2.2">
-<a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#abstract-interfaces" id="abstract-interfaces">Abstract Interfaces</a>
+<h1 id="rfc.section.5.2.2">
+<a href="#rfc.section.5.2.2">5.2.2.</a> <a href="#abstract-interfaces" id="abstract-interfaces">Abstract Interfaces</a>
 </h1>
-<p id="rfc.section.4.2.2.p.1">This section presents high-level pseudocode descriptions of the interfaces exposed by different types of transport components. Implementations for different languages should provide equivalent functionality, but should use the idioms for each language, mimicking the existing networking libraries.</p>
-<h1 id="rfc.section.4.2.2.1">
-<a href="#rfc.section.4.2.2.1">4.2.2.1.</a> <a href="#transport" id="transport">Transport</a>
+<p id="rfc.section.5.2.2.p.1">This section presents high-level pseudocode descriptions of the interfaces exposed by different types of transport components. Implementations for different languages should provide equivalent functionality, but should use the idioms for each language, mimicking the existing networking libraries.</p>
+<h1 id="rfc.section.5.2.2.1">
+<a href="#rfc.section.5.2.2.1">5.2.2.1.</a> <a href="#transport" id="transport">Transport</a>
 </h1>
 <p></p>
 
@@ -611,8 +621,8 @@
 <li>The &#8203;Server Factory&#8203; of the &#8203;Transport&#8203; can fail if the Transport does not provide a server-side implementation. However, most transports provide both a client and server implementation.</li>
 <li>The &#8203;transport configuration&#8203; is specific to each T&#8203;ransport&#8203;. Using a &#8203;Transport requires knowing the correct parameters to initialize that &#8203;Transport.</li>
 </ul>
-<h1 id="rfc.section.4.2.2.1.1">
-<a href="#rfc.section.4.2.2.1.1">4.2.2.1.1.</a> <a href="#client-factory" id="client-factory">Client Factory</a>
+<h1 id="rfc.section.5.2.2.1.1">
+<a href="#rfc.section.5.2.2.1.1">5.2.2.1.1.</a> <a href="#client-factory" id="client-factory">Client Factory</a>
 </h1>
 <p></p>
 
@@ -620,14 +630,14 @@
 <li>Client Factory&#8203; takes the &#8203;connection settings&#8203; and produces a &#8203;Connection&#8203; to that server.</li>
 <li>The &#8203;connection settings&#8203; are specific to each transport. Some transports will also require an argument indicating the &#8203;destination endpoint&#8203;. Producing a Connection&#8203; may fail if the server is unreachable or if the &#8203;transport configuration&#8203; was incorrect.</li>
 </ul>
-<h1 id="rfc.section.4.2.2.1.2">
-<a href="#rfc.section.4.2.2.1.2">4.2.2.1.2.</a> <a href="#server-factory" id="server-factory">Server Factory</a>
+<h1 id="rfc.section.5.2.2.1.2">
+<a href="#rfc.section.5.2.2.1.2">5.2.2.1.2.</a> <a href="#server-factory" id="server-factory">Server Factory</a>
 </h1>
 <p></p>
 
 <ul><li>Server Factory&#8203; takes the address on which the PT server should listen for incoming client connections and produces a &#8203;Listener&#8203; for that address</li></ul>
-<h1 id="rfc.section.4.2.2.1.3">
-<a href="#rfc.section.4.2.2.1.3">4.2.2.1.3.</a> <a href="#listener" id="listener">Listener</a>
+<h1 id="rfc.section.5.2.2.1.3">
+<a href="#rfc.section.5.2.2.1.3">5.2.2.1.3.</a> <a href="#listener" id="listener">Listener</a>
 </h1>
 <p></p>
 
@@ -638,52 +648,99 @@
 <li>Connection&#8203; is what is used to read and write data over the transport connection</li>
 <li>The transport-specific logic for obfuscating network traffic is implemented inside the &#8203;Connection.</li>
 </ul>
-<h1 id="rfc.section.5">
-<a href="#rfc.section.5">5.</a> <a href="#adapters" id="adapters">Adapters</a>
-</h1>
-<p id="rfc.section.5.p.1">This section covers the various different ways that the Pluggable Transport interfaces (both API and IPC) can be adapted to different use cases.</p>
-<h1 id="rfc.section.5.1">
-<a href="#rfc.section.5.1">5.1.</a> <a href="#api-to-ipc-adapter" id="api-to-ipc-adapter">API to IPC Adapter</a>
-</h1>
-<p id="rfc.section.5.1.p.1">When an application and the transports it uses are written in the same language, either the Transports API or Dispatcher IPC can be used. When they are in different languages, they must communicate through the Dispatcher IPC interface. For maximum flexibility and to minimize duplication of effort across languages, dispatcher can be implemented by wrapping transport implementations that implement the Transports API. For an example of this approach, see the Shapeshifter Dispatcher [&#8203;https://github.com/OperatorFoundation/shapeshifter-dispatcher]&#8203; , which wraps transports implementing the Transports API in the Go language and provides a Dispatcher IPC interface to use them from other languages.</p>
-<h1 id="rfc.section.5.2">
-<a href="#rfc.section.5.2">5.2.</a> <a href="#pt-10-compatibility" id="pt-10-compatibility">PT 1.0 Compatibility</a>
-</h1>
-<p id="rfc.section.5.2.p.1">The only interface defined in the PT 1.0 specification is an IPC interface. No standard API is defined. Therefore, PT 1.0 compatibility refers to compatibility between applications and transports where one side conforms to the PT 1.0 specification and the other conforms to the PT 2.1 specification. Fortunately, an adapter is not needed in this case as both the PT 1.0 and PT 2.1 specifications allow for version negotiation. The TOR_PT_MANAGED_TRANSPORT_VER environment variable or -ptversion command line flag is used by the application to specify a list of supported versions, for instance &#8220;1.0,2.1&#8221;. The PT provider responds with the VERSION command on stdout in order to specify which version is supported by the PT provider, for instance &#8220;VERSION 2.1&#8221;. Since the application can specify a list of supported versions, the PT provider can respond dynamically, supporting PT 1.0 when required and automatically upgrading to a PT 2.1 implementation when that is an available option. It is up to applications whether they want to support PT 2.1 exclusively or maintain backwards compatibility with PT 1.0 implementations.</p>
-<h1 id="rfc.section.5.3">
-<a href="#rfc.section.5.3">5.3.</a> <a href="#cross-language-linking" id="cross-language-linking">Cross-language Linking</a>
-</h1>
-<p id="rfc.section.5.3.p.1">If two languages are compatible via cross-language linking, then a suitable adapter can be written that wraps the implementation of the Transports API in one language with an API for a compatible language. For example, on Android the Go implementation of the Transports API is wrapped in a Java API to create Java language bindings without the need for a native Java implementation or use of Dispatcher IPC.</p>
-<h1 id="rfc.section.5.3.1">
-<a href="#rfc.section.5.3.1">5.3.1.</a> <a href="#using-the-dispatcher-ipc-interface-in-process" id="using-the-dispatcher-ipc-interface-in-process">Using the Dispatcher IPC Interface In-process</a>
-</h1>
-<p id="rfc.section.5.3.1.p.1">When using a transport that exposes the Dispatcher IPC interface, it may be more convenient to run the transport in a separate thread but in the same process as the application. Packets can still be routed through the transport&#8217;s SOCKS5 or TURN port on localhost. However, it may be inconvenient or impossible to use STDIN and STDOUT for communication between these two threads. Therefore, in some languages it may be appropriate to produce an &#8220;inter-thread interface&#8221; that reproduces the Dispatcher IPC interface&#8217;s semantics, but replaces STDIN and STDOUT with language-native function-call and event primitives. This is the approach used by OnionBrowser [&#8203;https://mike.tig.as/onionbrowser/&#8203;], the Tor implementation on iOS. This approach is used because Tor uses the Dispatcher IPC mechanism to talk to the transports instead of the Transports API. However, iOS does not allow for applications to have multiple processes. Therefore, an in-process Dispatcher IPC approach must be used instead of traditional separate process Dispatcher IPC. An alternative would be to use the Transports API directly instead of Dispatcher IPC.</p>
-<h1 id="rfc.section.5.4">
-<a href="#rfc.section.5.4">5.4.</a> <a href="#anonymity-considerations" id="anonymity-considerations">Anonymity Considerations</a>
-</h1>
-<p id="rfc.section.5.4.p.1">When designing and implementing a Pluggable Transport, care should be taken to preserve the privacy of clients and to avoid leaking personally identifying information.  Examples of client related considerations are: - Not logging client IP addresses to disk.  - Not leaking DNS addresses except when necessary.  - Ensuring that &#8220;TOR_PT_PROXY&#8221;&#8217;s &#8220;fail closed&#8221; behavior is implemented correctly.</p>
-<p id="rfc.section.5.4.p.2">Additionally, certain obfuscation mechanisms rely on information such as the server IP address and port being confidential, so clients also need to take care to preserve server side information confidential when applicable.</p>
 <h1 id="rfc.section.6">
-<a href="#rfc.section.6">6.</a> <a href="#references" id="references">References</a>
+<a href="#rfc.section.6">6.</a> <a href="#adapters" id="adapters">Adapters</a>
 </h1>
-<p id="rfc.section.6.p.1">[RFC2119] Bradner, S., &#8220;Key words for use in RFCs to Indicate Requirement Levels&#8221;, BCP 14, RFC 2119, March 1997.</p>
-<p id="rfc.section.6.p.2">[RFC1928] Leech, M., Ganis, M., Lee, Y., Kuris, R., Koblas, D., Jones, L., &#8220;SOCKS Protocol Version 5&#8221;, RFC 1928, March 1996.</p>
-<p id="rfc.section.6.p.3">[EXTORPORT] Kadianakis, G., Mathewson, N., &#8220;Extended ORPort and TransportControlPort&#8221;, Tor Proposal 196, March 2012.</p>
-<p id="rfc.section.6.p.4">[RFC3986] Berners-Lee, T., Fielding, R., Masinter, L., &#8220;Uniform Resource Identifier (URI): Generic Syntax&#8221;, RFC 3986, January 2005.</p>
-<p id="rfc.section.6.p.5">[RFC1929] Leech, M., &#8220;Username/Password Authentication for SOCKS V5&#8221;, RFC 1929, March 1996.</p>
-<p id="rfc.section.6.p.6">[PT2-DISPATCHER] Wiley, Brandon., Shapeshifter Dispatcher. https://github.com/OperatorFoundation/shapeshifter-dispatcher</p>
-<h1 id="rfc.section.7">
-<a href="#rfc.section.7">7.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
+<p id="rfc.section.6.p.1">This section covers the various different ways that the Pluggable Transport interfaces (both API and IPC) can be adapted to different use cases.</p>
+<h1 id="rfc.section.6.1">
+<a href="#rfc.section.6.1">6.1.</a> <a href="#api-to-ipc-adapter" id="api-to-ipc-adapter">API to IPC Adapter</a>
 </h1>
-<p id="rfc.section.7.p.1">Many people contributed to the PT 2.1 specification. Major contributions were made by Dr. Brandon Wiley (Operator Foundation), Nick Mathewson (Tor), and Ben Schwartz (Jigsaw).  Valuable feedback was provided by the attendees at the Pluggable Transport Implementers Meetings and the traffic-obf and tor-dev mailing lists. The PT 2.1 specification expands upon the &#8220;Pluggable Transport Specification (Version 1)&#8221; document authored by Yawning Angel (Tor). Inspiration for the PT 2.1 Go API was also inspired by the obfs4proxy implementation of the PT 1.0 specification in Go, also developed by Yawning Angel (Tor).</p>
+<p id="rfc.section.6.1.p.1">When an application and the transports it uses are written in the same language, either the Transports API or Dispatcher IPC can be used. When they are in different languages, they must communicate through the Dispatcher IPC interface. For maximum flexibility and to minimize duplication of effort across languages, dispatcher can be implemented by wrapping transport implementations that implement the Transports API. For an example of this approach, see the Shapeshifter Dispatcher <a href="#PT2-DISPATCHER" class="xref">[PT2-DISPATCHER]</a>, which wraps transports implementing the Transports API in the Go language and provides a Dispatcher IPC interface to use them from other languages.</p>
+<h1 id="rfc.section.6.2">
+<a href="#rfc.section.6.2">6.2.</a> <a href="#pt-10-compatibility" id="pt-10-compatibility">PT 1.0 Compatibility</a>
+</h1>
+<p id="rfc.section.6.2.p.1">The only interface defined in the PT 1.0 specification is an IPC interface. No standard API is defined. Therefore, PT 1.0 compatibility refers to compatibility between applications and transports where one side conforms to the PT 1.0 specification and the other conforms to the PT 2.1 specification. Fortunately, an adapter is not needed in this case as both the PT 1.0 and PT 2.1 specifications allow for version negotiation. The TOR_PT_MANAGED_TRANSPORT_VER environment variable or -ptversion command line flag is used by the application to specify a list of supported versions, for instance &#8220;1.0,2.1&#8221;. The PT provider responds with the VERSION command on stdout in order to specify which version is supported by the PT provider, for instance &#8220;VERSION 2.1&#8221;. Since the application can specify a list of supported versions, the PT provider can respond dynamically, supporting PT 1.0 when required and automatically upgrading to a PT 2.1 implementation when that is an available option. It is up to applications whether they want to support PT 2.1 exclusively or maintain backwards compatibility with PT 1.0 implementations.</p>
+<h1 id="rfc.section.6.3">
+<a href="#rfc.section.6.3">6.3.</a> <a href="#cross-language-linking" id="cross-language-linking">Cross-language Linking</a>
+</h1>
+<p id="rfc.section.6.3.p.1">If two languages are compatible via cross-language linking, then a suitable adapter can be written that wraps the implementation of the Transports API in one language with an API for a compatible language. For example, on Android the Go implementation of the Transports API is wrapped in a Java API to create Java language bindings without the need for a native Java implementation or use of Dispatcher IPC.</p>
+<h1 id="rfc.section.6.3.1">
+<a href="#rfc.section.6.3.1">6.3.1.</a> <a href="#using-the-dispatcher-ipc-interface-in-process" id="using-the-dispatcher-ipc-interface-in-process">Using the Dispatcher IPC Interface In-process</a>
+</h1>
+<p id="rfc.section.6.3.1.p.1">When using a transport that exposes the Dispatcher IPC interface, it may be more convenient to run the transport in a separate thread but in the same process as the application. Packets can still be routed through the transport&#8217;s SOCKS5 or TURN port on localhost. However, it may be inconvenient or impossible to use STDIN and STDOUT for communication between these two threads. Therefore, in some languages it may be appropriate to produce an &#8220;inter-thread interface&#8221; that reproduces the Dispatcher IPC interface&#8217;s semantics, but replaces STDIN and STDOUT with language-native function-call and event primitives. This is the approach used by OnionBrowser <a href="#ONION_BROWSER" class="xref">[ONION_BROWSER]</a>, the Tor implementation on iOS. This approach is used because Tor uses the Dispatcher IPC mechanism to talk to the transports instead of the Transports API. However, iOS does not allow for applications to have multiple processes. Therefore, an in-process Dispatcher IPC approach must be used instead of traditional separate process Dispatcher IPC. An alternative would be to use the Transports API directly instead of Dispatcher IPC.</p>
+<h1 id="rfc.section.6.4">
+<a href="#rfc.section.6.4">6.4.</a> <a href="#anonymity-considerations" id="anonymity-considerations">Anonymity Considerations</a>
+</h1>
+<p id="rfc.section.6.4.p.1">When designing and implementing a Pluggable Transport, care should be taken to preserve the privacy of clients and to avoid leaking personally identifying information.  Examples of client related considerations are:</p>
+<p></p>
+
+<ul>
+<li>Not logging client IP addresses to disk.</li>
+<li>Not leaking DNS addresses except when necessary.</li>
+<li>Ensuring that &#8220;TOR_PT_PROXY&#8221;&#8217;s &#8220;fail closed&#8221; behavior is implemented correctly.</li>
+</ul>
+<p id="rfc.section.6.4.p.3">Additionally, certain obfuscation mechanisms rely on information such as the server IP address and port being confidential, so clients also need to take care to preserve server side information confidential when applicable.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">8.</a> Normative References</h1>
-<table><tbody><tr>
+<a href="#rfc.references">7.</a> References</h1>
+<h1 id="rfc.references.1">
+<a href="#rfc.references.1">7.1.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8174">[RFC8174]</b></td>
+<td class="top">
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc8174">Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</a>", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.references.2">
+<a href="#rfc.references.2">7.2.</a> Informative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="ONION_BROWSER">[ONION_BROWSER]</b></td>
+<td class="top">"<a href="https://github.com/OnionBrowser/OnionBrowser">Onion Browser</a>", 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="PT2-DISPATCHER">[PT2-DISPATCHER]</b></td>
+<td class="top">
+<a>Wiley, B.</a>, "<a href="https://github.com/OperatorFoundation/shapeshifter-dispatcher">Shapeshifter Dispatcher</a>", 2018.</td>
+</tr>
+<tr>
 <td class="reference"><b id="PT2.1">[PT2.1]</b></td>
-<td class="top">"<a href="https://github.com/Pluggable-Transports/Pluggable-Transports-spec/blob/master/releases/PTSpecV2.1Draft1/Pluggable%20Transport%20Specification%20v2.1%20-%20Base%20Specification%20v2.1%2C%20Draft%201.pdf">Pluggable Transport Base Specification</a>", 2018.</td>
-</tr></tbody></table>
+<td class="top">
+<a>Wiley, B.</a>, "<a href="https://github.com/Pluggable-Transports/Pluggable-Transports-spec/blob/master/releases/PTSpecV2.1Draft1/Pluggable%20Transport%20Specification%20v2.1%20-%20Base%20Specification%20v2.1%2C%20Draft%201.pdf">Pluggable Transport Base Specification</a>", 2018.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.acknowledgments"><a href="#rfc.acknowledgments">Acknowledgments</a></h1>
+<p id="rfc.section.A.p.1">Many people contributed to the PT 2.1 specification. Major contributions were made by Dr. Brandon Wiley (Operator Foundation), Nick Mathewson (Tor), and Ben Schwartz (Jigsaw).  Valuable feedback was provided by the attendees at the Pluggable Transport Implementers Meetings and the traffic-obf and tor-dev mailing lists. The PT 2.1 specification expands upon the &#8220;Pluggable Transport Specification (Version 1)&#8221; document authored by Yawning Angel (Tor). Inspiration for the PT 2.1 Go API was also inspired by the obfs4proxy implementation of the PT 1.0 specification in Go, also developed by Yawning Angel (Tor).</p>
 <h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
 <div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Brandon Wiley</span> 
+	  <span class="n hidden">
+		<span class="family-name">Wiley</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Operator Foundation</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:brandon@operatorfoundation.org">brandon@operatorfoundation.org</a></span>
+
+<span class="vcardline">URI: <a href="https://operatorfoundation.org">https://operatorfoundation.org</a></span>
+
+  </address>
+</div><div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
 	  <span class="fn">David M. Oliver</span> 
@@ -704,29 +761,6 @@
 	<span class="vcardline">EMail: <a href="mailto:david@guardianproject.info">david@guardianproject.info</a></span>
 
 <span class="vcardline">URI: <a href="https://guardianproject.info">https://guardianproject.info</a></span>
-
-  </address>
-</div><div class="avoidbreak">
-  <address class="vcard">
-	<span class="vcardline">
-	  <span class="fn">Dr. Brandon Wiley</span> 
-	  <span class="n hidden">
-		<span class="family-name">Wiley</span>
-	  </span>
-	</span>
-	<span class="org vcardline">Operator Foundation</span>
-	<span class="adr">
-	  
-	  <span class="vcardline">
-		<span class="locality"></span> 
-		<span class="region"></span>
-		<span class="code"></span>
-	  </span>
-	  <span class="country-name vcardline"></span>
-	</span>
-	<span class="vcardline">EMail: <a href="mailto:brandon@operatorfoundation.org">brandon@operatorfoundation.org</a></span>
-
-<span class="vcardline">URI: <a href="https://operatorfoundation.org">https://operatorfoundation.org</a></span>
 
   </address>
 </div>

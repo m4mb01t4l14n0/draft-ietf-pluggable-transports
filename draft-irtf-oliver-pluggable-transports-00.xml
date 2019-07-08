@@ -19,7 +19,14 @@
 
   <front>
     <title abbrev="Pluggable Transports">Enabling Network Traffic Obfuscation - Pluggable Transports</title>
-    
+
+    <author initials="B." surname="Wiley" fullname="Brandon Wiley">
+      <organization>Operator Foundation</organization>
+      <address>
+        <email>brandon@operatorfoundation.org</email>
+        <uri>https://operatorfoundation.org</uri>
+      </address>
+    </author>
     <author initials="D." surname="Oliver" fullname="David M. Oliver">
       <organization>Guardian Project</organization>
       <address>
@@ -28,15 +35,7 @@
       </address>
     </author>
 
-    <author initials="B." surname="Wiley" fullname="Dr. Brandon Wiley">
-        <organization>Operator Foundation</organization>
-        <address>
-            <email>brandon@operatorfoundation.org</email>
-            <uri>https://operatorfoundation.org</uri>
-        </address>
-    </author>
-    
-    <date year="2019" month="June" day="26"/>
+    <date year="2019" month="July" day="08"/>
 
     <area>General</area>
     <workgroup>Network Working Group</workgroup>
@@ -67,7 +66,7 @@ required to make these technologies interoperable with applications.</t>
 <section anchor="introduction" title="Introduction">
 
 <t>The increased interest in network traffic obfuscation technologies mirrors the 
-increase in usage of Deep Packet Inspection (DPI) to actively monitor the content
+increase in usage of Deep Packet Inspection (DPI) to actively monitor the content 
 of application data in addition to that data’s routing information.  Deep Packet 
 Inspection inspects each packet based on the header of its request and the 
 data it carries. It can identify the type of protocol the connection is 
@@ -100,6 +99,14 @@ application code that implements the interfaces as specified in this document
 will be able to use all specification-compliant Pluggable Transports.</t>
 
 </section>
+<section anchor="conventions-and-definitions" title="Conventions and Definitions">
+
+<t>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,
+“SHOULD NOT”, “RECOMMENDED”, “NOT RECOMMENDED”, “MAY”, and “OPTIONAL” in this
+document are to be interpreted as described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/>
+when, and only when, they appear in all capitals, as shown here.</t>
+
+</section>
 <section anchor="background" title="Background">
 
 <t>We define an Internet censor as any network intermediary that seeks to block, divert or 
@@ -127,10 +134,10 @@ targeted traffic.</t>
 
 <t>A defense against this type of active probing is traffic obfuscation - disguising
 the application data itself in a manner that is less-easily fingerprinted.  However, in
-early experiments it quickly became clear that repeated use of the same
+early experiments it quickly became clear that repeated use of the same 
 obfuscation technique would, itself, be learned. Methods were developed 
 by which a single obfuscation technique could transform on its own TODO: cite FTE 
-proxy, ScrambleSuit, Dust.  This approach proved expensive in terms of
+proxy, ScrambleSuit, Dust. This approach proved expensive in terms of 
 computational load.  Interest gathered in solving this problem and as more ideas
 arose so to did the need for a mechanism supporting rapid deploying of new 
 obfuscation techniques.</t>
@@ -139,7 +146,7 @@ obfuscation techniques.</t>
 the Tor Project (and across a wider set of external parties using Tor as a vehicle 
 for research), vendors of other privacy-enhancing software (such as VPNs) quickly found 
 their products also foiled by DPI.  Thus, it becomes important to see
-transport plugability as a mechanism implemented in a manner independent of a
+transport pluggability as a mechanism implemented in a manner independent of a 
 specific product or service.  The notion of “Pluggable Transports” (PT) was born from
 these requirements.</t>
 
@@ -149,13 +156,13 @@ these requirements.</t>
 <t>The PT Server software exposes a public proxy that accepts connections from PT Clients. 
 The PT Client transforms the traffic before it hits the public Internet and the PT 
 Server reverses this transformation before passing the traffic on to its next destination. 
-The PT Server directly forwards this data to the Server App, but the
+The PT Server directly forwards this data to the Server App, but the 
 Server App itself may itself be a proxy server and expect the forwarded traffic it 
 receives to conform to a proxy communication protocol such as SOCKS or TURN. There is 
 also an optional lightweight protocol to facilitate communicating connection metadata 
 that would otherwise be lost such as the source IP address and port EXTORPORT.</t>
 
-<t>When using an in-process, language-specific API (“Transport API Interface”) to integrate PTs into an application on both client and server, the PT Client
+<t>When using an in-process, language-specific API (“Transport API Interface”) to integrate PTs into an application on both client and server, the PT Client 
 Library is integrated directly into the Client App and the PT Server Library is integrated 
 directly into the Server App. The Client App and Server App communicate through 
 socket-like APIs, with all communication between them going through the PT library, 
@@ -217,8 +224,7 @@ the Transport API on the other, as below (or vice-versa):</t>
 
 <t>Each invocation of a PT MUST be either a client OR a server.</t>
 
-<t>PT dispatchers MAY support any of the following proxy modes: PT 1.0 with SOCKS4, 
-    PT 1.0 with SOCKS5, or any of the PT 2.1 modes: transparent TCP, transparent UDP, or STUN-aware UDP.
+<t>PT dispatchers MAY support any of the following proxy modes: PT 1.0 with SOCKS4, PT 1.0 with SOCKS5, or any of the PT 2.1 modes: transparent TCP, transparent UDP, or STUN-aware UDP.
 Clients SHOULD prefer PT 2.1 over PT 1.0.</t>
 
 </section>
@@ -315,13 +321,7 @@ the ​Connection.</t>
 <t>This section covers the various different ways that the Pluggable Transport interfaces (both API and IPC) can be adapted to different use cases.</t>
 
 <section anchor="api-to-ipc-adapter" title="API to IPC Adapter">
-<t>When an application and the transports it uses are written in the same language, 
-either the Transports API or Dispatcher IPC can be used. When they are in different 
-languages, they must communicate through the Dispatcher IPC interface. For maximum 
-flexibility and to minimize duplication of effort across languages, dispatcher can 
-be implemented by wrapping transport implementations that implement the Transports 
-API. For an example of this approach, see the Shapeshifter Dispatcher 
-[​https://github.com/OperatorFoundation/shapeshifter-dispatcher]​ , which wraps 
+<t>When an application and the transports it uses are written in the same language, either the Transports API or Dispatcher IPC can be used. When they are in different languages, they must communicate through the Dispatcher IPC interface. For maximum flexibility and to minimize duplication of effort across languages, dispatcher can be implemented by wrapping transport implementations that implement the Transports API. For an example of this approach, see the Shapeshifter Dispatcher <xref target="PT2-DISPATCHER"/>, which wraps 
 transports implementing the Transports API in the Go language and provides a 
 Dispatcher IPC interface to use them from other languages.</t>
 
@@ -330,16 +330,16 @@ Dispatcher IPC interface to use them from other languages.</t>
 <t>The only interface defined in the PT 1.0 specification is an IPC interface. No 
 standard API is defined. Therefore, PT 1.0 compatibility refers to compatibility 
 between applications and transports where one side conforms to the PT 1.0 specification 
-and the other conforms to the PT 2.1 specification. Fortunately, an adapter is not
-needed in this case as both the PT 1.0 and PT 2.1 specifications allow for version
+and the other conforms to the PT 2.1 specification. Fortunately, an adapter is not 
+needed in this case as both the PT 1.0 and PT 2.1 specifications allow for version 
 negotiation. The TOR_PT_MANAGED_TRANSPORT_VER environment variable or -ptversion 
 command line flag is used by the application to specify a list of supported versions, 
-for instance “1.0,2.1”. The PT provider responds with the VERSION command on stdout in
+for instance “1.0,2.1”. The PT provider responds with the VERSION command on stdout in 
 order to specify which version is supported by the PT provider, for instance 
-“VERSION 2.1”. Since the application can specify a list of supported versions, the
+“VERSION 2.1”. Since the application can specify a list of supported versions, the 
 PT provider can respond dynamically, supporting PT 1.0 when required and automatically 
-upgrading to a PT 2.1 implementation when that is an available option. It is up to
-applications whether they want to support PT 2.1 exclusively or maintain backwards
+upgrading to a PT 2.1 implementation when that is an available option. It is up to 
+applications whether they want to support PT 2.1 exclusively or maintain backwards 
 compatibility with PT 1.0 implementations.</t>
 
 </section>
@@ -358,8 +358,7 @@ TURN port on localhost. However, it may be inconvenient or impossible to use STD
 and STDOUT for communication between these two threads. Therefore, in some languages 
 it may be appropriate to produce an “inter-thread interface” that reproduces the 
 Dispatcher IPC interface’s semantics, but replaces STDIN and STDOUT with language-native 
-function-call and event primitives. This is the approach used by OnionBrowser 
-[​https://mike.tig.as/onionbrowser/​], the Tor implementation on iOS. This approach 
+function-call and event primitives. This is the approach used by OnionBrowser <xref target="ONION_BROWSER"/>, the Tor implementation on iOS. This approach 
 is used because Tor uses the Dispatcher IPC mechanism to talk to the transports instead 
 of the Transports API. However, iOS does not allow for applications to have multiple 
 processes. Therefore, an in-process Dispatcher IPC approach must be used instead of 
@@ -372,41 +371,19 @@ Transports API directly instead of Dispatcher IPC.</t>
 
 <t>When designing and implementing a Pluggable Transport, care should be taken to preserve 
 the privacy of clients and to avoid leaking personally identifying information.
-Examples of client related considerations are:
-- Not logging client IP addresses to disk.
-- Not leaking DNS addresses except when necessary.
-- Ensuring that “TOR_PT_PROXY”’s “fail closed” behavior is implemented correctly.</t>
+Examples of client related considerations are:</t>
+
+<t><list style="symbols">
+  <t>Not logging client IP addresses to disk.</t>
+  <t>Not leaking DNS addresses except when necessary.</t>
+  <t>Ensuring that “TOR_PT_PROXY”’s “fail closed” behavior is implemented correctly.</t>
+</list></t>
 
 <t>Additionally, certain obfuscation mechanisms rely on information such as the server IP 
 address and port being confidential, so clients also need to take care to preserve 
 server side information confidential when applicable.</t>
 
 </section>
-</section>
-<section anchor="references" title="References">
-
-<t>[RFC2119] Bradner, S., “Key words for use in RFCs to Indicate Requirement Levels”, BCP 14, RFC 2119, March 1997.</t>
-
-<t>[RFC1928] Leech, M., Ganis, M., Lee, Y., Kuris, R., Koblas, D., Jones, L., “SOCKS Protocol Version 5”, RFC 1928, March 1996.</t>
-
-<t>[EXTORPORT] Kadianakis, G., Mathewson, N., “Extended ORPort and TransportControlPort”, Tor Proposal 196, March 2012.</t>
-
-<t>[RFC3986] Berners-Lee, T., Fielding, R., Masinter, L., “Uniform Resource Identifier (URI): Generic Syntax”, RFC 3986, January 2005.</t>
-
-<t>[RFC1929] Leech, M., “Username/Password Authentication for SOCKS V5”, RFC 1929, March 1996.</t>
-
-<t>[PT2-DISPATCHER] Wiley, Brandon., Shapeshifter Dispatcher. https://github.com/OperatorFoundation/shapeshifter-dispatcher</t>
-
-</section>
-<section anchor="acknowledgments" title="Acknowledgments">
-<t>Many people contributed to the PT 2.1 specification. Major contributions were made by
-Dr. Brandon Wiley (Operator Foundation), Nick Mathewson (Tor), and Ben Schwartz (Jigsaw). 
-Valuable feedback was provided by the attendees at the Pluggable Transport Implementers 
-Meetings and the traffic-obf and tor-dev mailing lists. The PT 2.1 specification expands
-upon the “Pluggable Transport Specification (Version 1)” document authored by Yawning 
-Angel (Tor). Inspiration for the PT 2.1 Go API was also inspired by the obfs4proxy
-implementation of the PT 1.0 specification in Go, also developed by Yawning Angel (Tor).</t>
-
 </section>
 
 
@@ -416,10 +393,65 @@ implementation of the PT 1.0 specification in Go, also developed by Yawning Ange
 
     <references title='Normative References'>
 
+
+
+
+
+<reference  anchor="RFC2119" target='https://www.rfc-editor.org/info/rfc2119'>
+<front>
+<title>Key words for use in RFCs to Indicate Requirement Levels</title>
+<author initials='S.' surname='Bradner' fullname='S. Bradner'><organization /></author>
+<date year='1997' month='March' />
+<abstract><t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract>
+</front>
+<seriesInfo name='BCP' value='14'/>
+<seriesInfo name='RFC' value='2119'/>
+<seriesInfo name='DOI' value='10.17487/RFC2119'/>
+</reference>
+
+
+
+<reference  anchor="RFC8174" target='https://www.rfc-editor.org/info/rfc8174'>
+<front>
+<title>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</title>
+<author initials='B.' surname='Leiba' fullname='B. Leiba'><organization /></author>
+<date year='2017' month='May' />
+<abstract><t>RFC 2119 specifies common key words that may be used in protocol  specifications.  This document aims to reduce the ambiguity by clarifying that only UPPERCASE usage of the key words have the  defined special meanings.</t></abstract>
+</front>
+<seriesInfo name='BCP' value='14'/>
+<seriesInfo name='RFC' value='8174'/>
+<seriesInfo name='DOI' value='10.17487/RFC8174'/>
+</reference>
+
+
+
+
+    </references>
+
+    <references title='Informative References'>
+
+<reference anchor="ONION_BROWSER" target="https://github.com/OnionBrowser/OnionBrowser">
+  <front>
+    <title>Onion Browser</title>
+    <author >
+      <organization></organization>
+    </author>
+    <date year="2019"/>
+  </front>
+</reference>
+<reference anchor="PT2-DISPATCHER" target="https://github.com/OperatorFoundation/shapeshifter-dispatcher">
+  <front>
+    <title>Shapeshifter Dispatcher</title>
+    <author initials="B." surname="Wiley" fullname="Brandon Wiley">
+      <organization></organization>
+    </author>
+    <date year="2018"/>
+  </front>
+</reference>
 <reference anchor="PT2.1" target="https://github.com/Pluggable-Transports/Pluggable-Transports-spec/blob/master/releases/PTSpecV2.1Draft1/Pluggable%20Transport%20Specification%20v2.1%20-%20Base%20Specification%20v2.1%2C%20Draft%201.pdf">
   <front>
     <title>Pluggable Transport Base Specification</title>
-    <author >
+    <author initials="B." surname="Wiley" fullname="Brandon Wiley">
       <organization></organization>
     </author>
     <date year="2018"/>
@@ -430,174 +462,182 @@ implementation of the PT 1.0 specification in Go, also developed by Yawning Ange
     </references>
 
 
+<section numbered="false" anchor="acknowledgments" title="Acknowledgments">
+
+<t>Many people contributed to the PT 2.1 specification. Major contributions were made by 
+Dr. Brandon Wiley (Operator Foundation), Nick Mathewson (Tor), and Ben Schwartz (Jigsaw). 
+Valuable feedback was provided by the attendees at the Pluggable Transport Implementers 
+Meetings and the traffic-obf and tor-dev mailing lists. The PT 2.1 specification expands 
+upon the “Pluggable Transport Specification (Version 1)” document authored by Yawning 
+Angel (Tor). Inspiration for the PT 2.1 Go API was also inspired by the obfs4proxy 
+implementation of the PT 1.0 specification in Go, also developed by Yawning Angel (Tor).</t>
+
+</section>
 
 
   </back>
 
 <!-- ##markdown-source:
-H4sIAPM4FF0AA8VcbXMbx5H+Pr9iiqqrkBEASXSci1iVq6OolzC2RBYJ2fEl
-KtdgdwBsuNhFdnYJwXGq/D1/4FKV/Dn9knu6e2Z2FgRlO3Hq5LKEl9mZnn59
-uqcH4/FYtUVb2hP9ojKzsqgW+o1tN3Vzo6eNmc+LTF/M5p3LTFvUlR7ry7Jb
-LDDS0veVW9dN65SZzRp7e7L/y7zOKrPCCjkmbMdF087HdVnc2ma8DuPHbRw/
-fvxYYTW7qJvtiS6qea1UsW5OdNt0rj1+/Pjp42NlGmtO9Ctb2caUishdNHW3
-PonEf4m/aDOv6GN1Y7f4ND/R51Vrm8q24+dEi1KuNVX+tSnrCvRtrVPr4kQr
-rZt5ZnPXbkv/sdZtnSUviyq3VRs+cKC7sXMX329Xg7dtU2RxcFavVng2fltU
-4Hq/jH3fjsvCtWNMMqtLDBvXP3+olOnaZd2cKD3GKHoK3xw8n+gL5uQBfyhs
-Pnhubotcvx5+VzcLUxXfsBgx5lVnmrwwlb5s6j/arJVBdmWKEoKiCf574Yes
-ZcSERUGjugZMWrbt2p08erR3lKrqZoWlbi0I1pfT48mTE34UGxRtO9ijKvqZ
-cVZfr21WQO+Y0gP/VA6FONHHj5/8KkxjmoVtEzKKdtnNJmDuozjzuFfCvR+O
-HZZ6NCvr2aOVcVCMR40tLWjA8CmR8QXoZkV50j//H8eP4wx4PaAW72/xCP4Z
-43/azb0jzvCKp8a/TybrfA4lB+ci19R4PNZmBtUxGfR0n2Hpw8upO9IwBW30
-ymZLyNettA123C6tbswaqpDbW1vWa1I7DX3XKrfrst7y+3quK28zrTf4OjH4
-FvNWxZ8663TnbA7d11nRZN3qFg8r1zW3tihLU2WWZ85sBWNwy2I90dNl4bRL
-d6/zGkpe1S0omkPpoZS6LFZFy7QmS+Htytny1rqRnnUttoFPGj2vMxDhtCLC
-8ASst2m79Ui7Zdfm9aYaMREFGfkYCplZ59jeuipQEPmEWRr7p65oZFMrc2Np
-TufpqMt6UWApnqtew80Q8zfQMm3W69JP5yZK8Tbh4zpmJ17PDDFqaWFE5VZj
-zT//mS3gL3+ZiFhXRZ6XVqkH5I6aOu8ymotmslgvayxPwCtbhymr75dQIHdV
-NA34z9xRYS6aoXNmYfVza9f60mQ3tsXaJBue4vD55fkRcQG6Bu0D1au6KlpI
-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
+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
 
 -->
 
