@@ -19,7 +19,7 @@
 
   <front>
     <title abbrev="Pluggable Transports">Enabling Network Traffic Obfuscation - Pluggable Transports</title>
-
+    
     <author initials="D." surname="Oliver" fullname="David M. Oliver">
       <organization>Guardian Project</organization>
       <address>
@@ -28,6 +28,14 @@
       </address>
     </author>
 
+    <author initials="B." surname="Wiley" fullname="Dr. Brandon Wiley">
+        <organization>Operator Foundation</organization>
+        <address>
+            <email>brandon@operatorfoundation.org</email>
+            <uri>https://operatorfoundation.org</uri>
+        </address>
+    </author>
+    
     <date year="2019" month="June" day="26"/>
 
     <area>General</area>
@@ -59,7 +67,7 @@ required to make these technologies interoperable with applications.</t>
 <section anchor="introduction" title="Introduction">
 
 <t>The increased interest in network traffic obfuscation technologies mirrors the 
-increase in usage Deep Packet Inspection (DPI) to actively monitor the content 
+increase in usage of Deep Packet Inspection (DPI) to actively monitor the content
 of application data in addition to that data’s routing information.  Deep Packet 
 Inspection inspects each packet based on the header of its request and the 
 data it carries. It can identify the type of protocol the connection is 
@@ -67,7 +75,7 @@ using even if it was encrypted. DPI is not a mechanism to decrypt what is
 inside packets but to identify the ‘protocol’ or the application it represents.</t>
 
 <t>Deep packet inspection has become the prime tool of censors and surveillance entities who 
-block, log and/or traffic-shape access to sites and services they deem undesirable.<vspace />
+block, log, and/or traffic-shape access to sites and services they deem undesirable.<vspace />
 As deep packet inspection has become more routine, the sophistication of monitoring 
 has increased to include active probing that fingerprints and classifies application 
 protocols.  Thus, even as conventional care in application design has improved
@@ -85,11 +93,11 @@ an application’s client/server code, in a manner that promotes rapid developme
 of obfuscation/circumvention tools and promotes reuse across privacy tools such as
 VPNs and secure proxies.</t>
 
-<t>This decoupling is accomplished by utilizing helper sub-processes that implement the 
-necessary forward/reverse proxy servers that handle the censorship circumvention, 
+<t>This decoupling is accomplished by utilizing helper code, either in-process through a language-specific API or in a separate sub-processes, that implements the
+necessary forward/reverse proxy services that handle the censorship circumvention,
 with a well defined and standardized configuration and management interface. Any 
 application code that implements the interfaces as specified in this document 
-will be able to use all spec compliant Pluggable Transports.</t>
+will be able to use all specification-compliant Pluggable Transports.</t>
 
 </section>
 <section anchor="background" title="Background">
@@ -103,7 +111,7 @@ techniques are commonly applied by Internet censors to block such traffic.  Thes
 <t><list style="numbers">
   <t>DNS Blocking</t>
   <t>IP Blocking</t>
-  <t>Protocol and Port Blocking</t>
+  <t>Port Blocking</t>
 </list></t>
 
 <t>These techniques are applicable to a connection’s metadata (IP routing information)
@@ -113,16 +121,16 @@ and do not require inspecting the connection’s datastream.</t>
 the initial data elements in the stream (or within blocks of the stream).  These 
 elements of the stream can contain clues 
 as to the application-level protocol employed, even when the data itself is 
-encrypted.  With repeated exposure, these clues (“fingerprints”) can be learned by
+encrypted.  Through observation over time, these clues (“fingerprints”) can be learned by
 the censor and (along with the routing information) used to block or divert 
 targeted traffic.</t>
 
 <t>A defense against this type of active probing is traffic obfuscation - disguising
-the application data itself in a manner that is less-easily fingerprinted.  But in
-early experiments, it quickly became clear that repeated use of the same 
+the application data itself in a manner that is less-easily fingerprinted.  However, in
+early experiments it quickly became clear that repeated use of the same
 obfuscation technique would, itself, be learned. Methods were developed 
 by which a single obfuscation technique could transform on its own TODO: cite FTE 
-proxy, ScrambleSuit.  But, this approach proved expensive in terms of 
+proxy, ScrambleSuit, Dust.  This approach proved expensive in terms of
 computational load.  Interest gathered in solving this problem and as more ideas
 arose so to did the need for a mechanism supporting rapid deploying of new 
 obfuscation techniques.</t>
@@ -131,7 +139,7 @@ obfuscation techniques.</t>
 the Tor Project (and across a wider set of external parties using Tor as a vehicle 
 for research), vendors of other privacy-enhancing software (such as VPNs) quickly found 
 their products also foiled by DPI.  Thus, it becomes important to see
-transport plug-ability as a mechanism implemented in a manner independent of a 
+transport plugability as a mechanism implemented in a manner independent of a
 specific product or service.  The notion of “Pluggable Transports” (PT) was born from
 these requirements.</t>
 
@@ -141,13 +149,13 @@ these requirements.</t>
 <t>The PT Server software exposes a public proxy that accepts connections from PT Clients. 
 The PT Client transforms the traffic before it hits the public Internet and the PT 
 Server reverses this transformation before passing the traffic on to its next destination. 
-By default, the PT Server directly forwards this data to the Server App, but the 
+The PT Server directly forwards this data to the Server App, but the
 Server App itself may itself be a proxy server and expect the forwarded traffic it 
 receives to conform to a proxy communication protocol such as SOCKS or TURN. There is 
 also an optional lightweight protocol to facilitate communicating connection metadata 
 that would otherwise be lost such as the source IP address and port EXTORPORT.</t>
 
-<t>When using the API on both client and server (“Transport API Interface”), the PT Client 
+<t>When using an in-process, language-specific API (“Transport API Interface”) to integrate PTs into an application on both client and server, the PT Client
 Library is integrated directly into the Client App and the PT Server Library is integrated 
 directly into the Server App. The Client App and Server App communicate through 
 socket-like APIs, with all communication between them going through the PT library, 
@@ -191,8 +199,8 @@ provide different proxy types, supporting proxying of both TCP and UDP traffic.<
         Figure 2. IPC Architecture Overview
 ]]></artwork></figure>
 
-<t>A PT may also be function via Dispatcher IPC on one end of the connection but via 
-Transport API on the other, as below (or vice-versa):</t>
+<t>A PT client-server setup may also mix and match interfaces, using Dispatcher IPC on one end of the connection and
+the Transport API on the other, as below (or vice-versa):</t>
 
 <figure><artwork><![CDATA[
   +------------+                     +---------------------------+
@@ -210,8 +218,8 @@ Transport API on the other, as below (or vice-versa):</t>
 <t>Each invocation of a PT MUST be either a client OR a server.</t>
 
 <t>PT dispatchers MAY support any of the following proxy modes: PT 1.0 with SOCKS4, 
-PT 1.0 with SOCKS5, PT 2.0, transparent TCP, transparent UDP, or STUN-aware UDP. 
-Clients SHOULD prefer PT 2.0 over PT 1.0.</t>
+    PT 1.0 with SOCKS5, or any of the PT 2.1 modes: transparent TCP, transparent UDP, or STUN-aware UDP.
+Clients SHOULD prefer PT 2.1 over PT 1.0.</t>
 
 </section>
 <section anchor="specification" title="Specification">
@@ -219,8 +227,8 @@ Clients SHOULD prefer PT 2.0 over PT 1.0.</t>
 <section anchor="pluggable-transport-naming" title="Pluggable Transport Naming">
 
 <t>Pluggable Transport names serve as unique identifiers, and every PT MUST have a unique name.
-PT names MUST be valid C identifiers. PT names MUST begin with a letter or underscore, and the remaining characters MUST be ASCII letters, numbers or underscores. No length limit is imposed.
-PT names MUST satisfy the regular expression [a-zA-Z_][a-zA-Z0-9_]*.</t>
+PT names MUST be valid C identifiers, which means that PT names MUST begin with a letter or underscore, and the remaining characters MUST be ASCII letters, numbers or underscores. No length limit is imposed.
+PT names MUST therefore satisfy the regular expression [a-zA-Z_][a-zA-Z0-9_]*.</t>
 
 </section>
 <section anchor="transports-api-interface" title="Transports API Interface">
@@ -236,8 +244,8 @@ implementing the core transform logic.</t>
 uses standard networking primitives from the language or platform.</t>
   <t>Transports require an explicit destination address to be specified. However, this can be
 either an explicit PT server destination with the Server App is already known 
-implicitly (the case with obfs4), or an explicit Server App destination with the PT server 
-destination already known implicity (the case with meek).</t>
+implicitly, or an explicit Server App destination with the PT server
+destination already known implicity.</t>
   <t>Transports may or may not generate, send, receive, store, and/or update persistent or 
 ephemeral state.</t>
   <t>Transports that do not need persistence or negotiation can interact with the application 
@@ -263,13 +271,13 @@ mimicking the existing networking libraries.</t>
 <t><list style="symbols">
   <t>Transport​ takes a ​transport configuration​ and provides a ​Client Factory​ and a 
 Server Factory.</t>
-  <t>Transports​ may provide additional language-specific configuration methods</t>
+  <t>Transports​ may provide additional language-specific configuration methods.</t>
   <t>The only way to obtain ​Client Factories​ and ​Server Factories​ is from the
 Transport​.</t>
   <t>The ​Server Factory​ of the ​Transport​ can fail if the Transport does not provide a
-server-side implementation, such as in the case of the meek transport. However,
+server-side implementation. However,
 most transports provide both a client and server implementation.</t>
-  <t>The ​transport configuration​ is specific to each T​ ransport​. Using a ​Transport
+  <t>The ​transport configuration​ is specific to each T​ransport​. Using a ​Transport
 requires knowing the correct parameters to initialize that ​Transport.</t>
 </list></t>
 
@@ -289,11 +297,10 @@ requires knowing the correct parameters to initialize that ​Transport.</t>
 <section anchor="listener" title="Listener">
 <t><list style="symbols">
   <t>Listener​ produces a stream of ​Connections</t>
-  <t>New ​Connections​ are available whenever an incoming connection from the PT
+  <t>New ​Connections​ are available whenever an incoming network connection from the PT
 client has been established. The language-specific API can adopt either a blocking or non-blocking API for accepting new connections, depending on what is idiomatic for the language.
 3.2.2.2. Connection</t>
   <t>Connection​ provides an API similar to the environment’s native socket type</t>
-  <t>The connection object is extended to provide access to the underlying actual network socket used by the transport, so that low-level networking settings can be changed by the application.</t>
   <t>Connection​ is what is used to read and write data over the transport connection</t>
   <t>The transport-specific logic for obfuscating network traffic is implemented inside
 the ​Connection.</t>
@@ -323,16 +330,16 @@ Dispatcher IPC interface to use them from other languages.</t>
 <t>The only interface defined in the PT 1.0 specification is an IPC interface. No 
 standard API is defined. Therefore, PT 1.0 compatibility refers to compatibility 
 between applications and transports where one side conforms to the PT 1.0 specification 
-and the other conforms to the PT 2.0 specification. Fortunately, an adapter is not 
-needed in this case as both the PT 1.0 and PT 2.0 specifications allow for version 
+and the other conforms to the PT 2.1 specification. Fortunately, an adapter is not
+needed in this case as both the PT 1.0 and PT 2.1 specifications allow for version
 negotiation. The TOR_PT_MANAGED_TRANSPORT_VER environment variable or -ptversion 
 command line flag is used by the application to specify a list of supported versions, 
-for instance “1.0,2.0”. The PT provider responds with the VERSION command on stdout in 
+for instance “1.0,2.1”. The PT provider responds with the VERSION command on stdout in
 order to specify which version is supported by the PT provider, for instance 
-“VERSION 2.0”. Since the application can specify a list of supported versions, the 
+“VERSION 2.1”. Since the application can specify a list of supported versions, the
 PT provider can respond dynamically, supporting PT 1.0 when required and automatically 
-upgrading to a PT 2.0 implementation when that is an available option. It is up to 
-applications whether they want to support PT 2.0 exclusively or maintain backwards 
+upgrading to a PT 2.1 implementation when that is an available option. It is up to
+applications whether they want to support PT 2.1 exclusively or maintain backwards
 compatibility with PT 1.0 implementations.</t>
 
 </section>
@@ -392,12 +399,12 @@ server side information confidential when applicable.</t>
 
 </section>
 <section anchor="acknowledgments" title="Acknowledgments">
-<t>Many people contributed to the PT 2.0 specification. Major contributions were made by 
+<t>Many people contributed to the PT 2.1 specification. Major contributions were made by
 Dr. Brandon Wiley (Operator Foundation), Nick Mathewson (Tor), and Ben Schwartz (Jigsaw). 
 Valuable feedback was provided by the attendees at the Pluggable Transport Implementers 
-Meetings and the traffic-obf and tor-dev mailing lists. The PT 2.0 specification expands 
+Meetings and the traffic-obf and tor-dev mailing lists. The PT 2.1 specification expands
 upon the “Pluggable Transport Specification (Version 1)” document authored by Yawning 
-Angel (Tor). Inspiration for the PT 2.0 Go API was also inspired by the obfs4proxy 
+Angel (Tor). Inspiration for the PT 2.1 Go API was also inspired by the obfs4proxy
 implementation of the PT 1.0 specification in Go, also developed by Yawning Angel (Tor).</t>
 
 </section>
